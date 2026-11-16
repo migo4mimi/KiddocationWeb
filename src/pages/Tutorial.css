@@ -1,0 +1,355 @@
+/* =========================================================
+   TUTORIAL ("How to play")
+   Same orange checkers and dark pills as the game.
+========================================================= */
+
+.tu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    min-height: 100vh;
+    min-height: 100dvh;
+  
+    padding: 16px;
+  
+    background-color: #ffbb59;
+    background-image: conic-gradient(
+      #ffbb59 25%,
+      #ff8a4a 0 50%,
+      #ffbb59 0 75%,
+      #ff8a4a 0
+    );
+    background-size: 256px 256px;
+  
+    font-family: var(--font-family, 'Poppins', system-ui, sans-serif);
+  }
+  
+  .tu button {
+    font-family: inherit;
+  }
+  
+  .tu-card {
+    position: relative;
+  
+    width: 100%;
+    max-width: 420px;
+  
+    padding: 26px 22px 22px;
+  
+    border-radius: 24px;
+  
+    background: #f4f1ea;
+    box-shadow: 0 6px 0 rgba(120, 60, 0, 0.3);
+    text-align: center;
+  }
+  
+  .tu-skip {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+  
+    border: 0;
+    background: none;
+    color: #5b5348;
+  
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .tu-error {
+    color: #a32626;
+    font-size: 13px;
+  }
+  
+  .tu-art {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  
+    min-height: 190px;
+    margin: 8px 0 14px;
+    padding: 16px;
+  
+    border-radius: 18px;
+  
+    background: #ffbb59;
+  }
+  
+  .tu-art--row {
+    flex-direction: row;
+    gap: 16px;
+  }
+  
+  .tu-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+  }
+  
+  .tu-row--center {
+    gap: 10px;
+  }
+  
+  .tu-board {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    min-width: 84px;
+    height: 56px;
+  
+    padding: 0 14px;
+  
+    border: 2px solid #6e7881;
+    border-radius: 8px;
+  
+    background: #9b9b9b;
+    color: #161616;
+  
+    font-size: 28px;
+    font-weight: 300;
+  }
+  
+  .tu-board--wide {
+    min-width: 190px;
+    height: 70px;
+  
+    font-size: 36px;
+  }
+  
+  .tu-timer {
+    padding: 6px 22px;
+  
+    border-radius: 999px;
+  
+    background: #2e3338;
+    color: #ffffff;
+  
+    font-size: 18px;
+  }
+  
+  .tu-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 96px;
+    min-width: 96px;
+    height: 36px;
+    padding: 0 8px;
+  
+    border-radius: 6px;
+  
+    color: #ffffff;
+  
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+  
+  .tu-tile--red {
+    background: #e02b2f;
+  }
+  
+  .tu-tile--blue {
+    background: #2c4fb0;
+  }
+  
+  .tu-key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 42px;
+    height: 42px;
+  
+    border-radius: 10px;
+  
+    background: #ffffff;
+  
+    font-size: 22px;
+    font-weight: 700;
+  }
+  
+  .tu-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  
+    width: 120px;
+    padding: 14px 8px;
+  
+    border-radius: 18px;
+  
+    color: #ffffff;
+  }
+  
+  .tu-badge b {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 54px;
+    height: 54px;
+  
+    border-radius: 50%;
+  
+    background: #ffffff;
+  
+    font-size: 32px;
+  }
+  
+  .tu-badge span {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .tu-badge--good {
+    background: #17a84a;
+  }
+  
+  .tu-badge--good b {
+    color: #0a9f00;
+  }
+  
+  .tu-badge--bad {
+    background: #d92222;
+  }
+  
+  .tu-badge--bad b {
+    color: #ff3b3b;
+  }
+  
+  .tu-levelbar {
+    width: 220px;
+    height: 22px;
+  
+    border-radius: 999px;
+  
+    background: #2b1a0b;
+    overflow: hidden;
+  }
+  
+  .tu-levelbar span {
+    display: block;
+    width: 65%;
+    height: 100%;
+  
+    background: #ff8a00;
+  }
+  
+  .tu-pill {
+    padding: 8px 16px;
+  
+    border-radius: 999px;
+  
+    background: #ff8a00;
+    color: #ffffff;
+  
+    font-size: 14px;
+    font-weight: 700;
+  }
+  
+  .tu-pill--green {
+    background: #b4d77b;
+    color: #2f4a12;
+  }
+
+  .tu-confirm-example {
+    padding: 10px 18px;
+    border-radius: 10px;
+    background: #ff8a00;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .tu-points-note {
+    max-width: 220px;
+    color: #5b5348;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .tu-title {
+    margin: 0 0 8px;
+  
+    font-size: 24px;
+  }
+  
+  .tu-text {
+    margin: 0;
+  
+    color: #5b5348;
+  
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  
+  .tu-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  
+    margin: 18px 0;
+  }
+  
+  .tu-dots span {
+    width: 10px;
+    height: 10px;
+  
+    border-radius: 50%;
+  
+    background: #d4cec5;
+  }
+  
+  .tu-dots span.is-on {
+    width: 24px;
+  
+    border-radius: 999px;
+  
+    background: #ff8a00;
+  }
+  
+  .tu-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .tu-button {
+    flex: 1;
+    height: 50px;
+  
+    border: 0;
+    border-radius: 12px;
+  
+    background: #ffb54f;
+    box-shadow: 0 4px 0 #ff8a00;
+    color: #ffffff;
+  
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  
+    cursor: pointer;
+  }
+  
+  .tu-button--light {
+    background: #ffffff;
+    box-shadow: 0 4px 0 #cfc7ba;
+    color: #5b5348;
+  }
+  
+  .tu button:focus-visible {
+    outline: 3px solid #2161b1;
+    outline-offset: 3px;
+  }

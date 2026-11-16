@@ -1,54 +1,96 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { supabase } from './lib/supabase';
+import { preloadProfilePicture } from './lib/profilePictures';
+import { fetchMyRequest, isStaff } from './lib/staff';
+import { applyTheme } from './lib/prefs';
+import { syncMusic } from './lib/feedback';
+import './theme.css';
+
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
+import PendingTeacher from './pages/PendingTeacher';
 import Home from './pages/Home';
+import Admin from './pages/Admin';
+import './desktop.css';
+
+function getSavedView(userId) {
+  try {
+    const savedView = window.sessionStorage.getItem(`kiddocation:view:${userId}`);
+    return savedView === 'home' ? 'home' : 'admin';
+  } catch (error) {
+    console.error('Could not restore the previous page:', error);
+    return 'admin';
+  }
+}
+
+function saveView(userId, nextView) {
+  try {
+    window.sessionStorage.setItem(`kiddocation:view:${userId}`, nextView);
+  } catch (error) {
+    console.error('Could not save the current page:', error);
+  }
+}
 
 function App() {
   const [session, setSession] = useState(null);
   const [profile, setProfile] = useState(null);
-  const [checkingSession, setCheckingSession] = useState(true);
-  const [authPage, setAuthPage] = useState('login');
+  const [teacherRequest, setTeacherRequest] = useState(null);
+  const [profileReady, setProfileReady] = useState(false);
+  const [continueAsStudent, setContinueAsStudent] = useState(false);
+  const [page, setPage] = useState('login');
+  const [view, setView] = useState('admin');
+  const [loading, setLoading] = useState(true);
+  const [recovering, setRecovering] = useState(() =>
+    window.location.hash.includes('type=recovery')
+  );
 
+  // Dark mode right away, and music after the first tap
+  // (browsers do not allow sound before you touch the page).
   useEffect(() => {
-    loadSession();
+    applyTheme();
+    window.addEventListener('pointerdown', syncMusic, { once: true });
+    return () => window.removeEventListener('pointerdown', syncMusic);
+  }, []);
+
+  // Restore the existing login session.
+  useEffect(() => {
+    let active = true;
+
+    async function initializeApp() {
+      const { data, error } = await supabase.auth.getSession();
+
+      if (!active) return;
+
+      if (error) {
+        console.error('Session error:', error);
+      }
+
+      setSession(data?.session ?? null);
+      setLoading(false);
+    }
+
+    initializeApp();
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event, newSession) => {
-      setSession(newSession);
-
-      if (newSession?.user) {
-        await loadProfile(newSession.user.id);
-      } else {
-        setProfile(null);
+    } = supabase.auth.onAuthStateChange((event, newSession) => {
+      if (event === 'PASSWORD_RECOVERY') {
+        setRecovering(true);
       }
+      setSession(newSession ?? null);
     });
 
     return () => {
+      active = false;
       subscription.unsubscribe();
     };
   }, []);
 
-  async function loadSession() {
-    const { data, error } = await supabase.auth.getSession();
-
-    if (error) {
-      console.error('Session error:', error);
-    }
-
-    const currentSession = data?.session ?? null;
-
-    setSession(currentSession);
-
-    if (currentSession?.user) {
-      await loadProfile(currentSession.user.id);
-    }
-
-    setCheckingSession(false);
-  }
-
-  async function loadProfile(userId) {
+  // Load the profile (name, grade, level, role...) and any teacher request.
+  const loadProfile = useCallback(async (userId) => {
+    setView(getSavedView(userId));
     const { data, error } = await supabase
       .from('profiles')
       .select('*')
@@ -57,13 +99,45 @@ function App() {
 
     if (error) {
       console.error('Profile error:', error);
+    } else {
+      if (data?.profile_picture_path) {
+        preloadProfilePicture(data.profile_picture_path).catch((pictureError) => {
+          console.error('Profile picture preload error:', pictureError);
+        });
+      }
+      setProfile(data);
+    }
+
+    try {
+      setTeacherRequest(await fetchMyRequest(userId));
+    } catch (err) {
+      setTeacherRequest(null);
+    }
+
+    setProfileReady(true);
+  }, []);
+
+  const userId = session?.user?.id;
+
+  useEffect(() => {
+    if (!userId) {
+      setProfile(null);
+      setTeacherRequest(null);
+      setProfileReady(false);
+      setContinueAsStudent(false);
       return;
     }
 
-    setProfile(data);
-  }
+    loadProfile(userId);
+  }, [userId, loadProfile]);
 
-  async function handleSignup({ name, grade, email, password }) {
+  // Called after a game, a purchase, or "check again".
+  const refreshProfile = useCallback(async () => {
+    if (userId) await loadProfile(userId);
+  }, [userId, loadProfile]);
+
+  // Register a new student, or a teacher who waits for approval.
+  async function handleSignup({ name, grade, email, password, wantsTeacher }) {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -71,101 +145,139 @@ function App() {
         data: {
           name,
           grade,
+          wants_teacher: wantsTeacher ? 'true' : 'false',
         },
       },
     });
 
     if (error) {
-      return {
-        error: error.message,
-      };
+      return { error: error.message };
     }
 
-    if (data.session && data.user) {
+    if (data.session) {
       setSession(data.session);
-      await loadProfile(data.user.id);
 
       return {
         success: true,
-        message: 'Account created successfully!',
+        message: wantsTeacher
+          ? 'Request sent! An admin will approve your teacher account.'
+          : 'Account created successfully!',
       };
     }
 
     return {
       success: true,
-      message:
-        'Account created! Please check your email to confirm your account.',
+      message: wantsTeacher
+        ? 'Account created! Please confirm your email. An admin will approve your teacher account.'
+        : 'Account created! Please check your email to confirm your account.',
     };
   }
 
+  // Sign out the current user.
   async function handleLogout() {
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error('Logout error:', error);
+      return;
+    }
 
     setSession(null);
     setProfile(null);
-    setAuthPage('login');
+    setPage('login');
+    setView('admin');
+    setRecovering(false);
   }
 
-  // -----------------------------------------
-  // SESSION CHECK
-  // -----------------------------------------
-
-  if (checkingSession) {
-    return (
-      <div
-        style={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#dcd8f4',
-          fontFamily: 'Poppins, sans-serif',
-          fontSize: '20px',
-        }}
-      >
-        Loading Kiddocation...
-      </div>
-    );
+  function changeView(nextView) {
+    if (userId) saveView(userId, nextView);
+    setView(nextView);
   }
 
-  // -----------------------------------------
-  // NOT LOGGED IN
-  // -----------------------------------------
+  // Called after a new password has been saved.
+  function handlePasswordUpdated() {
+    window.history.replaceState(null, '', window.location.pathname);
+    setRecovering(false);
+  }
 
+  // Show a loading screen while restoring the session.
+  if (loading) {
+    return <main className="app-loading">Loading Kiddocation...</main>;
+  }
+
+  // The user clicked a reset link in their email: ask for a new password.
+  if (recovering && session) {
+    return <ResetPassword onDone={handlePasswordUpdated} />;
+  }
+
+  // Show Login, Signup or Forgot password when nobody is signed in.
   if (!session) {
-    if (authPage === 'signup') {
+    if (page === 'signup') {
       return (
         <Signup
-          onLogin={() => setAuthPage('login')}
-          onSignupSuccess={handleSignup}
+          onNavigateToLogin={() => setPage('login')}
+          onLogin={() => setPage('login')}
+          onSignup={handleSignup}
         />
       );
     }
 
+    if (page === 'forgot') {
+      return <ForgotPassword onNavigateToLogin={() => setPage('login')} />;
+    }
+
     return (
       <Login
-        onLoginSuccess={async (newSession) => {
-          setSession(newSession);
-
-          if (newSession?.user) {
-            await loadProfile(newSession.user.id);
-          }
-        }}
-        onSignup={() => setAuthPage('signup')}
+        onNavigateToSignup={() => setPage('signup')}
+        onNavigateToForgot={() => setPage('forgot')}
+        onSignup={() => setPage('signup')}
+        onLoginSuccess={(newSession) => setSession(newSession)}
       />
     );
   }
 
-  // -----------------------------------------
-  // LOGGED IN → HOME
-  // -----------------------------------------
+  // Wait until we know who this is (student, teacher or admin).
+  if (!profileReady) {
+    return <main className="app-loading">Loading Kiddocation...</main>;
+  }
+
+  const staff = isStaff(profile?.role);
+
+  // Signed up as a teacher and not approved yet.
+  const waiting = teacherRequest?.status === 'pending';
+  const turnedDown =
+    teacherRequest?.status === 'rejected' && !profile?.grade && !continueAsStudent;
+
+  if (!staff && (waiting || turnedDown)) {
+    return (
+      <PendingTeacher
+        request={teacherRequest}
+        name={profile?.name || ''}
+        email={session.user.email || ''}
+        onCheckAgain={refreshProfile}
+        onContinueAsStudent={() => setContinueAsStudent(true)}
+        onLogout={handleLogout}
+      />
+    );
+  }
+
+  // Teachers and admins land on the dashboard; students always get Home.
+  if (staff && view === 'admin') {
+    return (
+      <Admin
+        profile={profile}
+        onHome={() => changeView('home')}
+        onLogout={handleLogout}
+      />
+    );
+  }
 
   return (
     <Home
-      session={session}
-      user={session?.user}
       profile={profile}
       onLogout={handleLogout}
+      onRefreshProfile={refreshProfile}
+      onDashboard={staff ? () => changeView('admin') : undefined}
     />
   );
 }

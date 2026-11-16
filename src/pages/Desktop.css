@@ -1,0 +1,141 @@
+/* =========================================================
+   PHONES AND LAPTOPS / PCs
+
+   Phones use the Figma layout: one column with the bottom bar.
+   Laptops and PCs (wider than 900px) get their own layout:
+     - a side menu instead of the bottom bar
+     - a bigger Home screen
+     - a bigger game stage with a colorful background
+     - wider Settings, Store and Lobby pages
+   This file is imported last in App.jsx so it can override the rest.
+========================================================= */
+
+/* ---------- phones: keep the bottom bar clear of the home bar / notch ---------- */
+
+.hm-nav {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  height: calc(142 * var(--u) + env(safe-area-inset-bottom, 0px));
+}
+
+.hm-header {
+  margin-top: env(safe-area-inset-top, 0px);
+}
+
+/* ---------- laptops and PCs ---------- */
+
+@media (min-width: 900px) {
+  /* ----- Home: side menu on the left, content on the right ----- */
+
+  .hm-stage {
+    max-width: 1180px;
+  }
+
+  .hm-inner {
+    /* a fixed size, a little smaller on short screens */
+    --u: min(1.3px, calc(100dvh / 760));
+
+    display: grid;
+    grid-template-columns: calc(210 * var(--u)) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+
+  .hm-header {
+    grid-column: 1 / -1;
+    margin-top: 0;
+  }
+
+  .hm-points {
+    left: auto;
+    right: calc(40 * var(--u));
+  }
+
+  .hm-nav {
+    grid-column: 1;
+    grid-row: 2;
+
+    grid-template-columns: 1fr;
+    grid-auto-rows: calc(142 * var(--u));
+    align-content: start;
+
+    height: auto;
+    padding-bottom: 0;
+
+    border-top: 0;
+  }
+
+  .hm-nav__item + .hm-nav__item {
+    border-left: 0;
+    border-top: 1px solid #000000;
+    box-shadow: inset 0 calc(4 * var(--u)) 0 #6e7881;
+  }
+
+  .hm-main,
+  .hm-message,
+  .lb,
+  .store,
+  .settings-content {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .hm-main {
+    padding-top: calc(40 * var(--u));
+  }
+
+  /* ----- Settings, Store and Lobby: wider and roomier ----- */
+
+  .settings-content {
+    max-width: 520px;
+  }
+
+  .settings-profile-card {
+    max-width: 480px;
+  }
+
+  .settings-section,
+  .settings-stat,
+  .settings-signout {
+    width: min(480px, calc(100% - 32px));
+  }
+
+  .lb {
+    max-width: 620px;
+  }
+
+  .store {
+    max-width: 620px;
+    padding-top: 28px;
+  }
+
+  .store-preview {
+    height: 200px;
+  }
+
+  .lobby-column {
+    max-width: 540px;
+    padding-top: 48px;
+  }
+
+  /* ----- Game: a bigger stage, with the colorful wall around it ----- */
+
+  .game-page {
+    background-color: #cf7a33;
+    background-image: conic-gradient(
+      #e0a452 25%,
+      #cf7a33 0 50%,
+      #e0a452 0 75%,
+      #cf7a33 0
+    );
+    background-size: 200px 200px;
+  }
+
+  .game-frame {
+    /* fills the height of the window, no 412 px limit */
+    width: min(100vw, calc(100dvh * 412 / 917));
+
+    border-radius: 22px;
+    box-shadow:
+      0 0 0 4px #2e3338,
+      0 24px 60px rgba(0, 0, 0, 0.35);
+  }
+}

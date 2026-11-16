@@ -1,0 +1,819 @@
+/* =========================================================
+   SETTINGS (opens from the SETTINGS tab in Home)
+   Based on the "SETTINGS ON" frame in Figma (412px wide).
+========================================================= */
+
+.settings-content {
+  flex: 1;
+
+  width: 100%;
+  max-width: 412px;
+
+  margin: 0 auto;
+  padding-bottom: 32px;
+
+  background: var(--color-bg, #f4f1ea);
+  color: #000000;
+
+  font-family: var(--font-family, 'Poppins', system-ui, sans-serif);
+}
+
+.settings-content button {
+  font-family: inherit;
+}
+
+.settings-content button:focus-visible {
+  outline: 3px solid #2161b1;
+  outline-offset: 2px;
+}
+
+/* ---------- back arrow ---------- */
+
+.settings-back {
+  display: block;
+
+  margin: 40px 0 0 19px;
+  padding: 12px;
+
+  border: 0;
+  background: none;
+
+  line-height: 0;
+  cursor: pointer;
+}
+
+.settings-back img {
+  display: block;
+  width: 23px;
+  height: 15px;
+
+  transform: rotate(180deg);
+}
+
+/* ---------- profile card ---------- */
+
+.settings-profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: calc(100% - 32px);
+
+  margin: 27px auto 0;
+  padding: 26px 27px 21px;
+
+  border-radius: 30px;
+
+  background: #ffffff;
+}
+
+.settings-avatar {
+  position: relative;
+
+  width: 214px;
+  height: 214px;
+}
+
+.settings-avatar__circle {
+  position: relative;
+  z-index: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.settings-avatar__picture {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #072445;
+}
+
+.settings-name {
+  margin: 9px 0 0;
+
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 36px;
+}
+
+.settings-level {
+  margin: 1px 0 0;
+
+  color: #818080;
+
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.settings-exp-label {
+  margin: 0;
+
+  color: #818080;
+
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.settings-exp-bar {
+  width: 100%;
+  height: 32px;
+
+  margin-top: 7px;
+
+  border-radius: 16px;
+
+  background: #2b1a0b;
+
+  overflow: hidden;
+}
+
+.settings-exp-fill {
+  height: 100%;
+
+  border-radius: 16px;
+
+  background: #ff8a00;
+}
+
+/* ---------- streak + rank cards ---------- */
+
+.settings-stat {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  box-sizing: border-box;
+  width: min(323px, calc(100% - 32px));
+  height: 64px;
+
+  margin: 9px auto 0;
+  padding: 0 12px 0 70px;
+
+  border: 3px solid #6e7881;
+  border-radius: 12px;
+
+  background: #fffafa;
+}
+
+.settings-stat--streak {
+  height: 76px;
+}
+
+.settings-stat--rank {
+  margin-top: 16px;
+
+  background: #ffffff;
+}
+
+.settings-stat__icon {
+  position: absolute;
+  display: block;
+}
+
+.settings-stat__icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.settings-stat__icon--fire {
+  left: 15px;
+  top: 3px;
+
+  width: 44px;
+  height: 51px;
+}
+
+.settings-stat__icon--rank {
+  left: 14px;
+  top: 5px;
+
+  width: 49px;
+  height: 49px;
+}
+
+.settings-stat__label {
+  margin: 0;
+
+  color: #000000;
+
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.settings-stat__value {
+  margin: 0;
+
+  color: #000000;
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.settings-stat--rank .settings-stat__value {
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.settings-stat__best {
+  position: absolute;
+  right: 12px;
+  bottom: 4px;
+  margin: 0;
+  color: #000000;
+  font-size: 10px;
+}
+
+.settings-stat__icon--rank svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- sections (orange tab + white card) ---------- */
+
+.settings-section {
+  width: min(321px, calc(100% - 32px));
+
+  margin: 0 auto 14px;
+}
+
+.settings-section--account {
+  margin-top: 60px;
+}
+
+.settings-section__header {
+  box-sizing: border-box;
+  height: 50px;
+
+  margin: 0;
+  padding: 0 18px;
+
+  border-radius: 12px;
+
+  background: #ffbd59;
+
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 41px;
+}
+
+.settings-section__body {
+  position: relative;
+
+  margin-top: -12px;
+
+  border-radius: 12px;
+
+  background: #ffffff;
+}
+
+.settings-section--game .settings-section__body {
+  padding: 6px 0 5px;
+}
+
+.settings-section--apps .settings-section__body {
+  padding: 10px 0 9px;
+}
+
+/* ---------- rows ---------- */
+
+.settings-row {
+  display: flex;
+
+  box-sizing: border-box;
+  width: 100%;
+
+  border: 0;
+  background: none;
+
+  color: #000000;
+
+  text-align: left;
+}
+
+button.settings-row {
+  cursor: pointer;
+}
+
+.settings-row__title {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.settings-row__desc {
+  margin-top: -2px;
+
+  color: #b4d77b;
+
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.settings-row__text {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+/* rows with a description (Account) */
+
+.settings-row--detail {
+  align-items: flex-start;
+
+  min-height: 88px;
+  padding: 12px 17px 11px 24px;
+}
+
+.settings-row--detail .settings-row__icon {
+  flex: 0 0 31px;
+
+  display: flex;
+  justify-content: center;
+
+  width: 31px;
+
+  margin: 6px 17px 0 0;
+}
+
+.settings-row--detail .settings-chevron {
+  align-self: center;
+}
+
+/* rows with a switch or arrow (Game and Apps) */
+
+.settings-row--simple {
+  align-items: center;
+
+  height: 58px;
+  padding: 0 26px 0 24px;
+}
+
+.settings-row--compact {
+  height: 51px;
+}
+
+.settings-row--simple .settings-row__icon {
+  flex: 0 0 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+
+  margin-right: 10px;
+}
+
+.settings-row--simple .settings-row__title {
+  flex: 1;
+}
+
+/* ---------- row icons ---------- */
+
+.settings-profile-crop {
+  position: relative;
+
+  display: block;
+  width: 31px;
+  height: 35px;
+
+  overflow: hidden;
+}
+
+.settings-profile-crop img {
+  position: absolute;
+  left: -48.72%;
+  top: -28.08%;
+
+  width: 197.44%;
+  height: 153.89%;
+  max-width: none;
+}
+
+.settings-icon-lock {
+  display: block;
+  width: 31px;
+  height: 37px;
+}
+
+.settings-icon-sound {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+}
+
+.settings-icon-music {
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+
+.settings-icon-bell {
+  display: block;
+  width: 29px;
+  height: 28px;
+}
+
+.settings-icon-moon {
+  display: block;
+  width: 36px;
+  height: 38px;
+}
+
+/* ---------- chevron ---------- */
+
+.settings-chevron {
+  flex-shrink: 0;
+
+  width: 9px;
+  height: 9px;
+
+  margin-left: auto;
+  margin-right: 4px;
+
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
+
+  transform: rotate(45deg);
+}
+
+/* ---------- delete account ---------- */
+
+.settings-delete {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+
+  box-sizing: border-box;
+  width: 100%;
+  height: 90px;
+
+  margin: 8px 0 16px;
+  padding: 9px 16px 0 17px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: #fdf0f1;
+
+  text-align: left;
+  cursor: pointer;
+}
+
+.settings-delete__icon {
+  flex-shrink: 0;
+
+  width: 33px;
+  height: 33px;
+
+  margin: 16px 19px 0 0;
+  object-fit: cover;
+}
+
+.settings-delete__text {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.settings-delete__title {
+  color: #ef4944;
+
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.settings-delete__desc {
+  max-width: 190px;
+  margin-top: -2px;
+
+  color: #000000;
+
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.settings-delete .settings-chevron {
+  align-self: center;
+
+  margin-top: -9px;
+}
+
+/* ---------- switches ---------- */
+
+.settings-toggle {
+  position: relative;
+
+  flex-shrink: 0;
+
+  width: 45px;
+  height: 25px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: #6e7881;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.settings-toggle.is-on {
+  background: #34c759;
+}
+
+.settings-toggle__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+
+  width: 21px;
+  height: 21px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+
+  transition: transform 0.2s ease;
+}
+
+.settings-toggle.is-on .settings-toggle__knob {
+  transform: translateX(20px);
+}
+
+/* ---------- sign out (not in Figma) ---------- */
+
+.settings-signout {
+  display: block;
+
+  box-sizing: border-box;
+  width: min(321px, calc(100% - 32px));
+  height: 48px;
+
+  margin: 22px auto 0;
+
+  border: 3px solid #6e7881;
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  color: #364250;
+
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+/* ---------- small message ---------- */
+
+.settings-notice {
+  position: fixed;
+  left: 50%;
+  bottom: 128px;
+  z-index: 20;
+
+  max-width: calc(100% - 32px);
+
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  background: #364250;
+
+  color: #ffffff;
+
+  font-size: 13px;
+
+  transform: translateX(-50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settings-toggle,
+  .settings-toggle__knob {
+    transition: none;
+  }
+}
+
+/* ---------- pop-up windows ---------- */
+
+.settings-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.settings-modal {
+  position: relative;
+
+  width: min(100%, 380px);
+  max-height: 90vh;
+  overflow-y: auto;
+
+  padding: 26px 22px 22px;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+  color: #222222;
+}
+
+.settings-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+
+  border: 0;
+  background: none;
+  color: #555555;
+
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.settings-modal__title {
+  margin: 0 28px 14px 0;
+
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.settings-modal__text {
+  margin: 0 0 14px;
+
+  color: #5b5348;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.settings-field {
+  display: block;
+
+  margin-bottom: 14px;
+
+  color: #5b5348;
+
+  font-size: 13px;
+}
+
+.settings-field input,
+.settings-field select {
+  display: block;
+
+  box-sizing: border-box;
+  width: 100%;
+  height: 46px;
+
+  margin-top: 6px;
+  padding: 0 12px;
+
+  border: 2px solid #d4cec5;
+  border-radius: 12px;
+
+  background: #ffffff;
+  color: #222222;
+
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.settings-picture-editor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.settings-picture-editor__preview {
+  width: min(230px, 72vw);
+  height: min(230px, 72vw);
+  margin: 0 auto 12px;
+  background: #08284b;
+  box-shadow: 0 0 0 5px #f4f1ea, 0 0 0 7px #d4cec5;
+}
+
+.settings-picture-editor__upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 10px;
+  background: #ff8a00;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.settings-picture-editor__upload input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.settings-picture-editor__hint {
+  margin: 8px 0 0;
+  color: #5b5348;
+  font-size: 12px;
+  text-align: center;
+}
+
+.settings-picture-editor__zoom {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  color: #5b5348;
+  font-size: 13px;
+}
+
+.settings-modal__error {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+
+  border-radius: 10px;
+
+  background: #ffe3e3;
+  color: #b3202a;
+
+  font-size: 14px;
+}
+
+.settings-modal__button {
+  display: block;
+
+  width: 100%;
+  height: 48px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: #ffb54f;
+  box-shadow: 0 4px 0 #ff8a00;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+}
+
+.settings-modal__button--danger {
+  background: #ef4944;
+  box-shadow: 0 4px 0 #b3302c;
+}
+
+.settings-modal__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.settings-modal__switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 14px;
+
+  border-radius: 14px;
+
+  background: #f4f1ea;
+
+  font-size: 16px;
+}

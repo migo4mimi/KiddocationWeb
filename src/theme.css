@@ -1,0 +1,66 @@
+﻿/* DARK MODE: turned on in Settings. Cards stay white, the page behind turns dark. */
+
+html[data-theme='dark'] {
+  --color-bg: #34373c;
+}
+
+html[data-theme='dark'] body,
+html[data-theme='dark'] .home-page,
+html[data-theme='dark'] .home-shell,
+html[data-theme='dark'] .game-page,
+html[data-theme='dark'] .store,
+html[data-theme='dark'] .settings-content {
+  background: #34373c;
+}
+
+html[data-theme='dark'] .welcome-area h2,
+html[data-theme='dark'] .store-info__text strong {
+  color: #ffffff;
+}
+
+html[data-theme='dark'] .welcome-description,
+html[data-theme='dark'] .store-info__text span,
+html[data-theme='dark'] .store-message {
+  color: #cfd2d6;
+}
+
+html[data-theme='dark'] .hm-description,
+html[data-theme='dark'] .hm-hint,
+html[data-theme='dark'] .hm-message,
+html[data-theme='dark'] .hm-message p {
+  color: #f1f3f5;
+}
+
+html[data-theme='dark'] .hm-nav__item,
+html[data-theme='dark'] .hm-back {
+  color: #ffffff;
+}
+
+html[data-theme='dark'] .settings-content {
+  color: #f1f3f5;
+}
+
+html[data-theme='dark'] .settings-back img {
+  filter: brightness(0) invert(1);
+}
+
+html[data-theme='dark'] .settings-profile-card,
+html[data-theme='dark'] .settings-stat,
+html[data-theme='dark'] .settings-section__body,
+html[data-theme='dark'] .settings-signout,
+html[data-theme='dark'] .settings-modal {
+  color: #222222;
+}
+
+html[data-theme='dark'] .settings-section__header {
+  color: #30200b;
+}
+
+html[data-theme='dark'] .settings-row__desc {
+  color: #536f29;
+}
+
+html[data-theme='dark'] .avatar-panel {
+  border-color: #4a4e55;
+  background: #2b2e32;
+}

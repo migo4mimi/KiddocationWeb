@@ -1,0 +1,31 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="29" height="28.0257" viewBox="0 0 29 28.0257" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 49">
+<ellipse id="Ellipse 44" cx="14.5747" cy="8.57329" rx="8.5" ry="8.50151" transform="rotate(-90.4958 14.5747 8.57329)" fill="url(#paint0_linear_0_25)"/>
+<path id="Rectangle 431" d="M8.19572 22.0809C7.09119 22.0905 6.18799 21.2029 6.17836 20.0984L6.08062 8.88326C6.07099 7.77873 6.95858 6.87553 8.06311 6.86591L21.0337 6.75286C22.1383 6.74324 23.0415 7.63083 23.0511 8.73536L23.1488 19.9505C23.1585 21.055 22.2709 21.9582 21.1663 21.9678L8.19572 22.0809Z" fill="url(#paint1_linear_0_25)"/>
+<path id="Rectangle 432" d="M10 26.5257C10 25.6973 10.6716 25.0257 11.5 25.0257H18.5C19.3284 25.0257 20 25.6973 20 26.5257C20 27.3541 19.3284 28.0257 18.5 28.0257H11.5C10.6716 28.0257 10 27.3541 10 26.5257Z" fill="url(#paint2_linear_0_25)"/>
+<path id="Polygon 2" d="M17.5858 13.4399C18.3668 12.6588 19.6332 12.6588 20.4142 13.4399L25.5858 18.6115C26.8457 19.8714 25.9534 22.0257 24.1716 22.0257H13.8284C12.0466 22.0257 11.1543 19.8714 12.4142 18.6115L17.5858 13.4399Z" fill="url(#paint3_linear_0_25)"/>
+<path id="Polygon 1" d="M8.58578 13.4399C9.36683 12.6588 10.6332 12.6588 11.4142 13.4399L16.5858 18.6115C17.8457 19.8714 16.9534 22.0257 15.1716 22.0257H4.82843C3.04662 22.0257 2.15428 19.8714 3.41421 18.6115L8.58578 13.4399Z" fill="url(#paint4_linear_0_25)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_25" x1="14.5747" y1="0.0717859" x2="14.5747" y2="17.0748" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF8A00"/>
+<stop offset="1" stop-color="#FFBD59"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_25" x1="6.12949" y1="14.4908" x2="23.1" y2="14.3429" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF8A00"/>
+<stop offset="1" stop-color="#FFBD59"/>
+</linearGradient>
+<linearGradient id="paint2_linear_0_25" x1="10" y1="26.5257" x2="20" y2="26.5257" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF8A00"/>
+<stop offset="0.9999" stop-color="#FFBD59"/>
+</linearGradient>
+<linearGradient id="paint3_linear_0_25" x1="7.5" y1="11.0259" x2="19" y2="22.0257" gradientUnits="userSpaceOnUse">
+<stop offset="0.0624998" stop-color="#FF8A00"/>
+<stop offset="0.870192" stop-color="#FFBD59"/>
+</linearGradient>
+<linearGradient id="paint4_linear_0_25" x1="3" y1="18.5259" x2="13.5" y2="23.0259" gradientUnits="userSpaceOnUse">
+<stop offset="0.146436" stop-color="#FF8A00"/>
+<stop offset="0.9999" stop-color="#FFBD59"/>
+</linearGradient>
+</defs>
+</svg>

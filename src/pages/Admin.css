@@ -4,21 +4,44 @@
     font-family: var(--font-family);
     color: #111111;
   }
+
+body.admin-dashboard-active {
+  background: #f4f1ea;
+}
+
+  .admin-page footer,
+  .admin-page .footer {
+    display: none;
+  }
   
   /* HEADER */
   
   .admin-header {
-    min-height: 110px;
+    min-height: 150px;
   
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
   
     padding: 25px 50px;
   
     background: #ffffff;
   
-    border-bottom: 2px solid #e5dfd5;
+    border-bottom: 2px solid #000000;
+  }
+
+  .admin-heading {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .admin-logo {
+    display: block;
+    width: 68px;
+    height: 68px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 5px 8px rgba(54, 66, 80, 0.12));
   }
   
   .admin-label {
@@ -310,6 +333,15 @@
   
       gap: 15px;
     }
+
+    .admin-heading {
+      gap: 14px;
+    }
+
+    .admin-logo {
+      width: 60px;
+      height: 60px;
+    }
   
     .admin-overview,
     .admin-content {
@@ -323,4 +355,48 @@
     .admin-content {
       grid-template-columns: 1fr;
     }
+  }
+  .request-actions {
+    white-space: nowrap;
+  }
+  
+  .request-actions button {
+    margin-right: 6px;
+    padding: 6px 12px;
+  
+    border: 0;
+    border-radius: 8px;
+  
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  }
+  
+  .request-approve {
+    background: #25bd52;
+    color: #ffffff;
+  }
+  
+  .request-decline {
+    background: #ffe3e3;
+    color: #b3202a;
+  }
+  
+  .request-actions button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .admin-notice {
+    margin-bottom: 14px;
+    padding: 12px 16px;
+  
+    border-radius: 12px;
+  
+    background: #e6f7ec;
+    color: #1f7a3d;
+  
+    font-size: 14px;
   }

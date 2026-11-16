@@ -1,0 +1,1029 @@
+/* =========================================================
+   GAME
+   Based on the "GAME" frames in Figma (412 x 917).
+   Every size uses --u, which is 1 design pixel.
+========================================================= */
+
+.game-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--color-bg, #f4f1ea);
+  font-family: var(--font-family, 'Poppins', system-ui, sans-serif);
+}
+
+.game-frame {
+  position: relative;
+
+  width: min(100vw, calc(100vh * 412 / 917), 412px);
+  width: min(100vw, calc(100dvh * 412 / 917), 412px);
+  aspect-ratio: 412 / 917;
+
+  container-type: inline-size;
+  overflow: hidden;
+
+  background: #ffbb59;
+}
+
+.game-scene {
+  --u: calc(100cqw / 412);
+
+  position: absolute;
+  inset: 0;
+
+  /* checkered wall: 128 px squares */
+  background-color: #ffbb59;
+  background-image: conic-gradient(
+    #ffbb59 25%,
+    #ff8a4a 0 50%,
+    #ffbb59 0 75%,
+    #ff8a4a 0
+  );
+  background-size: calc(256 * var(--u)) calc(256 * var(--u));
+  background-position: calc(-52 * var(--u)) calc(97 * var(--u));
+
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.game-scene button {
+  font-family: inherit;
+}
+
+/* ---------- the world ---------- */
+
+.game-world {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  touch-action: none;
+  cursor: pointer;
+}
+
+.game-board {
+  fill: #9b9b9b;
+  stroke: #6e7881;
+  stroke-width: 2;
+}
+
+.game-board-text {
+  fill: #161616;
+
+  font-family: inherit;
+  font-weight: 300;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.game-platform {
+  fill: #d9d9d9;
+}
+
+.game-platform-edge {
+  fill: #8c959c;
+}
+
+.game-tile {
+  stroke: rgba(0, 0, 0, 0.25);
+  stroke-width: 1.5;
+}
+
+.game-tile--red {
+  fill: #e02b2f;
+}
+
+.game-tile--blue {
+  fill: #2c4fb0;
+}
+
+.game-avatar {
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.game-avatar.is-walking {
+  animation: game-walk 0.28s ease-in-out infinite;
+}
+
+.game-avatar-shadow {
+  fill: rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+
+@keyframes game-walk {
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* ---------- top bar ---------- */
+
+.game-counter,
+.game-quit {
+  position: absolute;
+  z-index: 3;
+}
+
+.game-counter {
+  left: calc(42 * var(--u));
+  top: calc(46 * var(--u));
+
+  width: calc(129 * var(--u));
+  height: calc(51 * var(--u));
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  background: #2e3338;
+  color: #ffffff;
+
+  font-size: calc(30 * var(--u));
+}
+
+.game-quit {
+  left: calc(190 * var(--u));
+  top: calc(52 * var(--u));
+
+  width: calc(40 * var(--u));
+  height: calc(40 * var(--u));
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+  background: rgba(46, 51, 56, 0.55);
+  color: #ffffff;
+
+  font-size: calc(16 * var(--u));
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (pointer: coarse) {
+  .game-quit {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+.game-quit:focus-visible,
+.game-exit-button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* ---------- timer ---------- */
+
+.game-timer {
+  position: absolute;
+  z-index: 3;
+
+  left: calc(62 * var(--u));
+  top: calc(733 * var(--u));
+
+  width: calc(283 * var(--u));
+  height: calc(127 * var(--u));
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: calc(36 * var(--u));
+  background: #2e3338;
+  color: #ffffff;
+
+  font-size: calc(52 * var(--u));
+  font-weight: 300;
+
+  transition: background-color 0.2s ease;
+}
+
+.game-timer.is-correct {
+  background: #138a49;
+}
+
+.game-timer.is-wrong {
+  background: #a81b24;
+}
+
+.game-hint {
+  position: absolute;
+  z-index: 3;
+
+  left: calc(30 * var(--u));
+  right: calc(30 * var(--u));
+  top: calc(872 * var(--u));
+
+  margin: 0;
+
+  color: #3b2a14;
+
+  font-size: calc(12 * var(--u));
+  text-align: center;
+}
+
+.game-confirm {
+  position: absolute;
+  z-index: 4;
+  left: calc(62 * var(--u));
+  top: calc(675 * var(--u));
+  width: calc(283 * var(--u));
+  min-height: calc(42 * var(--u));
+  border: 0;
+  border-radius: calc(12 * var(--u));
+  background: #ff8a00;
+  box-shadow: 0 calc(4 * var(--u)) 0 #b85b00;
+  color: #ffffff;
+  font-size: calc(17 * var(--u));
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.game-confirm:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.game-confirmation-status {
+  position: absolute;
+  z-index: 3;
+  left: calc(20 * var(--u));
+  right: calc(20 * var(--u));
+  top: calc(116 * var(--u));
+  margin: 0;
+  padding: calc(6 * var(--u)) calc(10 * var(--u));
+  border-radius: calc(12 * var(--u));
+  background: rgba(46, 51, 56, 0.82);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: calc(13 * var(--u));
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.game-confirmation-status--below-hud {
+  top: calc(235 * var(--u));
+}
+
+.game-answer-error,
+.game-reward-error {
+  position: absolute;
+  z-index: 5;
+  left: calc(25 * var(--u));
+  right: calc(25 * var(--u));
+  margin: 0;
+  color: #a62626;
+  font-size: calc(12 * var(--u));
+  text-align: center;
+}
+
+.game-answer-error {
+  top: calc(718 * var(--u));
+}
+
+.game-reward-error {
+  top: calc(710 * var(--u));
+}
+
+/* ---------- right or wrong ---------- */
+
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+.game-overlay--correct {
+  background: linear-gradient(
+    180deg,
+    rgba(70, 170, 70, 0.28) 0%,
+    rgba(60, 175, 80, 0.5) 55%,
+    rgba(18, 170, 70, 0.95) 100%
+  );
+}
+
+.game-overlay--wrong {
+  background: linear-gradient(
+    180deg,
+    rgba(230, 70, 60, 0.32) 0%,
+    rgba(225, 50, 50, 0.6) 55%,
+    rgba(220, 35, 35, 0.97) 100%
+  );
+}
+
+.game-overlay__icon {
+  position: absolute;
+  left: calc(136 * var(--u));
+  top: calc(388 * var(--u));
+
+  width: calc(140 * var(--u));
+  height: calc(140 * var(--u));
+
+  animation: game-pop 0.28s ease-out;
+}
+
+.game-overlay__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes game-pop {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.game-sr {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  margin: -1px;
+  padding: 0;
+
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- result screen ---------- */
+
+.game-scene--result {
+  background-image: conic-gradient(
+    #e9aa52 25%,
+    #ec8546 0 50%,
+    #e9aa52 0 75%,
+    #ec8546 0
+  );
+}
+
+.game-result-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(92 * var(--u));
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: calc(46 * var(--u));
+  font-weight: 400;
+  line-height: calc(57 * var(--u));
+  text-align: center;
+}
+
+.game-result-title span,
+.game-result-title strong {
+  display: block;
+}
+
+.game-result-title strong {
+  font-weight: 700;
+}
+
+.game-pedestal {
+  position: absolute;
+  left: calc(123 * var(--u));
+  top: calc(430 * var(--u));
+
+  width: calc(192 * var(--u));
+  height: calc(60 * var(--u));
+}
+
+.game-pedestal__side,
+.game-pedestal__top {
+  position: absolute;
+  left: 0;
+
+  width: 100%;
+
+  border-radius: 50%;
+}
+
+.game-pedestal__side {
+  top: calc(14 * var(--u));
+  height: calc(46 * var(--u));
+
+  background: #d9bd90;
+}
+
+.game-pedestal__top {
+  top: 0;
+  height: calc(48 * var(--u));
+
+  background: radial-gradient(ellipse at 50% 40%, #fff8ea, #f0dcbc);
+}
+
+.game-result-avatar {
+  position: absolute;
+  left: calc(128 * var(--u));
+  top: calc(296 * var(--u));
+
+  width: calc(156 * var(--u));
+  height: calc(156 * var(--u));
+
+  image-rendering: pixelated;
+  object-fit: contain;
+}
+
+.game-score-label {
+  position: absolute;
+  left: calc(25 * var(--u));
+  top: calc(507 * var(--u));
+
+  width: calc(363 * var(--u));
+  height: calc(55 * var(--u));
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+
+  border-radius: calc(16 * var(--u));
+  background: #ffb454;
+  color: #ffffff;
+
+  font-size: calc(38 * var(--u));
+  letter-spacing: calc(1 * var(--u));
+}
+
+.game-score-card {
+  position: absolute;
+  left: calc(46 * var(--u));
+  top: calc(585 * var(--u));
+
+  width: calc(314 * var(--u));
+  height: calc(125 * var(--u));
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(14 * var(--u));
+
+  border-radius: calc(40 * var(--u));
+  background: #333333;
+  color: #ffffff;
+}
+
+.game-score-card__star {
+  display: block;
+
+  width: calc(100 * var(--u));
+  height: calc(100 * var(--u));
+}
+
+.game-score-card__star svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.game-score-card__value {
+  font-size: calc(82 * var(--u));
+  font-weight: 300;
+  line-height: 1;
+}
+
+.game-exit-button {
+  position: absolute;
+  left: calc(115 * var(--u));
+  top: calc(748 * var(--u));
+
+  width: calc(183 * var(--u));
+  height: calc(52 * var(--u));
+
+  border: 0;
+  border-radius: calc(12 * var(--u));
+
+  background: #ffb54f;
+  box-shadow: 0 calc(4 * var(--u)) 0 #ff8a00;
+  color: #ffffff;
+
+  font-size: calc(24 * var(--u));
+  font-weight: 700;
+  letter-spacing: calc(1 * var(--u));
+
+  cursor: pointer;
+}
+
+.game-exit-button:active {
+  transform: translateY(calc(2 * var(--u)));
+  box-shadow: 0 calc(2 * var(--u)) 0 #ff8a00;
+}
+
+.game-result-message {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(826 * var(--u));
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: calc(36 * var(--u));
+  text-align: center;
+}
+
+.game-points-summary {
+  position: absolute;
+  left: calc(25 * var(--u));
+  right: calc(25 * var(--u));
+  top: calc(712 * var(--u));
+  margin: 0;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: calc(13 * var(--u));
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.game-points-summary p {
+  margin: 0;
+}
+
+.game-points-summary p + p {
+  margin-top: calc(4 * var(--u));
+  font-size: calc(15 * var(--u));
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-avatar.is-walking,
+  .game-overlay__icon {
+    animation: none;
+  }
+
+  .game-timer {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   LIVE GAME ADDITIONS
+   get ready, standings, results with XP, ranking
+========================================================= */
+
+.game-problem {
+  position: absolute;
+  left: calc(30 * var(--u));
+  right: calc(30 * var(--u));
+  top: 38%;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: calc(24 * var(--u));
+  text-align: center;
+}
+
+.game-scene--result .game-problem + .game-exit-button {
+  top: 52%;
+}
+
+/* ---------- get ready ---------- */
+
+.game-countdown {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(6 * var(--u));
+
+  background: rgba(46, 51, 56, 0.62);
+  color: #ffffff;
+
+  text-align: center;
+}
+
+.game-countdown p {
+  margin: 0;
+
+  font-size: calc(18 * var(--u));
+  letter-spacing: 2px;
+}
+
+.game-countdown strong {
+  font-size: calc(150 * var(--u));
+  font-weight: 300;
+  line-height: 1;
+}
+
+.game-countdown span {
+  font-size: calc(26 * var(--u));
+}
+
+/* ---------- standings after each round ---------- */
+
+.game-standings {
+  position: absolute;
+  left: calc(56 * var(--u));
+  right: calc(56 * var(--u));
+  top: calc(552 * var(--u));
+
+  padding: calc(10 * var(--u)) calc(14 * var(--u));
+
+  border-radius: calc(14 * var(--u));
+
+  background: rgba(46, 51, 56, 0.78);
+  color: #ffffff;
+}
+
+.game-standings__title {
+  margin: 0 0 calc(4 * var(--u));
+
+  color: #b4d77b;
+
+  font-size: calc(12 * var(--u));
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.game-standings__row {
+  display: flex;
+  gap: calc(10 * var(--u));
+
+  margin: 0;
+
+  font-size: calc(15 * var(--u));
+  line-height: calc(24 * var(--u));
+}
+
+.game-standings__row span:nth-child(2) {
+  flex: 1;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-standings__row.is-me {
+  color: #ffd54a;
+}
+
+/* ---------- XP and level ---------- */
+
+.game-earned {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(6 * var(--u));
+}
+
+.game-earned__xp,
+.game-earned__rank {
+  padding: calc(4 * var(--u)) calc(14 * var(--u));
+
+  border-radius: 999px;
+
+  background: #2e3338;
+  color: #b4d77b;
+
+  font-size: calc(16 * var(--u));
+  font-weight: 600;
+}
+
+.game-earned__rank {
+  color: #ffd54a;
+}
+
+.game-earned__level {
+  padding: calc(5 * var(--u)) calc(14 * var(--u));
+
+  border-radius: 999px;
+
+  background: #ff8a00;
+  color: #ffffff;
+
+  font-size: calc(15 * var(--u));
+}
+
+.game-earned__bar {
+  display: block;
+
+  width: calc(200 * var(--u));
+  height: calc(10 * var(--u));
+
+  border-radius: 999px;
+
+  background: #2b1a0b;
+
+  overflow: hidden;
+}
+
+.game-earned__bar span {
+  display: block;
+  height: 100%;
+
+  background: #ff8a00;
+}
+
+.game-earned-slot {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.game-earned-slot--result {
+  top: calc(864 * var(--u));
+}
+
+.game-earned-slot--ranking {
+  top: calc(676 * var(--u));
+}
+
+/* ---------- practice result buttons ---------- */
+
+.game-exit-button--left {
+  left: calc(36 * var(--u));
+
+  width: calc(160 * var(--u));
+}
+
+.game-scene--result .game-exit-button,
+.game-scene--result .game-again-link {
+  top: calc(782 * var(--u));
+}
+
+.game-scene--result .game-result-message {
+  top: calc(840 * var(--u));
+  font-size: calc(20 * var(--u));
+}
+
+.game-again-link {
+  position: absolute;
+  left: calc(216 * var(--u));
+  top: calc(748 * var(--u));
+
+  width: calc(160 * var(--u));
+  height: calc(52 * var(--u));
+
+  border: 0;
+  border-radius: calc(12 * var(--u));
+
+  background: #ffffff;
+  box-shadow: 0 calc(4 * var(--u)) 0 #cfc7ba;
+  color: #5b5348;
+
+  font-size: calc(20 * var(--u));
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/* ---------- ranking ---------- */
+
+.game-scene--ranking {
+  background-color: #f4f1ea;
+  background-image: none;
+}
+
+.game-ranking-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(40 * var(--u));
+
+  margin: 0;
+
+  color: #ff8a00;
+
+  font-size: calc(40 * var(--u));
+  font-weight: 700;
+  text-align: center;
+}
+
+.game-winner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100 * var(--u));
+
+  margin: 0;
+
+  color: #2e3338;
+
+  font-size: calc(18 * var(--u));
+  font-weight: 600;
+  text-align: center;
+}
+
+.game-ranking-list {
+  position: absolute;
+  left: calc(24 * var(--u));
+  right: calc(24 * var(--u));
+  top: calc(146 * var(--u));
+
+  height: calc(520 * var(--u));
+
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--u));
+
+  margin: 0;
+  padding: 0 calc(4 * var(--u)) calc(6 * var(--u)) 0;
+
+  list-style: none;
+  overflow-y: auto;
+}
+
+.game-ranking-row {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  gap: calc(10 * var(--u));
+
+  height: calc(66 * var(--u));
+  padding: 0 calc(14 * var(--u));
+
+  border-radius: calc(12 * var(--u));
+
+  box-shadow: calc(4 * var(--u)) calc(4 * var(--u)) 0 rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+}
+
+.game-ranking-row--top {
+  background: #ff9a3c;
+}
+
+.game-ranking-row--rest {
+  background: #b5252a;
+}
+
+.game-ranking-row.is-me {
+  outline: calc(3 * var(--u)) solid #2e3338;
+}
+
+.game-ranking-row__place {
+  width: calc(28 * var(--u));
+
+  font-size: calc(24 * var(--u));
+  font-weight: 700;
+  text-align: center;
+}
+
+.game-ranking-row__avatar {
+  flex-shrink: 0;
+
+  width: calc(44 * var(--u));
+  height: calc(44 * var(--u));
+
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+
+  image-rendering: pixelated;
+  object-fit: contain;
+}
+
+.game-ranking-row__name {
+  flex: 1;
+
+  min-width: 0;
+  overflow: hidden;
+
+  font-size: calc(18 * var(--u));
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-ranking-row__score {
+  font-size: calc(24 * var(--u));
+  font-weight: 700;
+}
+
+.game-ranking-buttons {
+  position: absolute;
+  left: calc(24 * var(--u));
+  right: calc(24 * var(--u));
+  top: calc(804 * var(--u));
+
+  display: flex;
+  gap: calc(12 * var(--u));
+}
+
+.game-ranking-button {
+  flex: 1;
+
+  height: calc(56 * var(--u));
+
+  border: 0;
+  border-radius: calc(12 * var(--u));
+
+  background: #ffb54f;
+  box-shadow: 0 calc(4 * var(--u)) 0 #ff8a00;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: calc(15 * var(--u));
+  font-weight: 700;
+  letter-spacing: calc(1 * var(--u));
+
+  cursor: pointer;
+}
+
+.game-ranking-button--orange {
+  background: #ff8a00;
+  box-shadow: 0 calc(4 * var(--u)) 0 #c96a00;
+}
+
+/* avatars drawn by Avatar.jsx */
+.game-result-avatar {
+  overflow: visible;
+}
+
+.game-ranking-row__avatar {
+  overflow: hidden;
+}
+
+/* =========================================================
+   QUESTION AND ANSWERS WHILE THE CAMERA IS ZOOMED IN
+========================================================= */
+
+.game-hud {
+  position: absolute;
+  left: calc(44 * var(--u));
+  right: calc(44 * var(--u));
+  top: calc(108 * var(--u));
+  z-index: 3;
+
+  padding: calc(10 * var(--u)) calc(12 * var(--u)) calc(12 * var(--u));
+
+  border-radius: calc(20 * var(--u));
+
+  background: rgba(46, 51, 56, 0.9);
+  color: #ffffff;
+
+  pointer-events: none;
+  text-align: center;
+}
+
+.game-hud__question {
+  margin: 0 0 calc(8 * var(--u));
+
+  font-size: calc(32 * var(--u));
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.game-hud__answers {
+  display: flex;
+  gap: calc(10 * var(--u));
+}
+
+.game-hud__chip {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: calc(5 * var(--u)) calc(8 * var(--u));
+
+  border-radius: calc(12 * var(--u));
+
+  font-size: calc(30 * var(--u));
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-hud__chip--red {
+  background: #e02b2f;
+}
+
+.game-hud__chip--blue {
+  background: #2c4fb0;
+}

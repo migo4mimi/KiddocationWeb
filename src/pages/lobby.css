@@ -1,0 +1,361 @@
+/* =========================================================
+   LOBBY (Ranked match and Custom game)
+   Same colors as the game screens: orange checkers, dark
+   pills, cream cards.
+========================================================= */
+
+.lobby-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+  
+    padding: 0 16px 40px;
+  
+    background-color: #ffbb59;
+    background-image: conic-gradient(
+      #ffbb59 25%,
+      #ff8a4a 0 50%,
+      #ffbb59 0 75%,
+      #ff8a4a 0
+    );
+    background-size: 256px 256px;
+  
+    color: #161616;
+    font-family: var(--font-family, 'Poppins', system-ui, sans-serif);
+  }
+  
+  .lobby-page button,
+  .lobby-page input {
+    font-family: inherit;
+  }
+  
+  .lobby-column {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  
+    width: 100%;
+    max-width: 412px;
+  
+    margin: 0 auto;
+    padding-top: 28px;
+  }
+  
+  /* ---------- header ---------- */
+  
+  .lobby-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .lobby-back {
+    flex-shrink: 0;
+  
+    width: 46px;
+    height: 46px;
+  
+    border: 0;
+    border-radius: 50%;
+  
+    background: #2e3338;
+    color: #ffffff;
+  
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  
+  .lobby-title {
+    margin: 0;
+  
+    color: #ffffff;
+  
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 1px;
+  
+    text-shadow: 0 2px 0 rgba(120, 60, 0, 0.35);
+  }
+  
+  .lobby-subtitle {
+    margin: 2px 0 0;
+  
+    color: #3b2a14;
+  
+    font-size: 14px;
+  }
+  
+  /* ---------- cards ---------- */
+  
+  .lobby-card {
+    overflow: hidden;
+  
+    border-radius: 20px;
+  
+    background: #f4f1ea;
+    box-shadow: 0 4px 0 rgba(120, 60, 0, 0.25);
+  }
+  
+  .lobby-card__header {
+    margin: 0;
+    padding: 12px 18px;
+  
+    background: #ffb454;
+    color: #ffffff;
+  
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .lobby-note {
+    margin: 0;
+    padding: 16px 18px 4px;
+  
+    color: #5b5348;
+  
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .lobby-note--card {
+    padding: 12px 16px;
+  
+    border-radius: 14px;
+  
+    background: #f4f1ea;
+    text-align: center;
+  }
+  
+  .lobby-error {
+    margin: 0;
+    padding: 12px 16px;
+  
+    border-radius: 14px;
+  
+    background: #ffe3e3;
+    color: #b3202a;
+  
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  /* ---------- buttons ---------- */
+  
+  .lobby-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  
+    padding: 16px 18px 20px;
+  }
+  
+  .lobby-card .lobby-actions {
+    padding-top: 14px;
+  }
+  
+  .lobby-column > .lobby-actions {
+    padding: 4px 0 0;
+  }
+  
+  .lobby-button {
+    height: 52px;
+  
+    border: 0;
+    border-radius: 12px;
+  
+    background: #ffb54f;
+    box-shadow: 0 4px 0 #ff8a00;
+    color: #ffffff;
+  
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  
+    cursor: pointer;
+  }
+  
+  .lobby-button--light {
+    background: #ffffff;
+    box-shadow: 0 4px 0 #cfc7ba;
+    color: #5b5348;
+  }
+  
+  .lobby-button:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #ff8a00;
+  }
+  
+  .lobby-button--light:active:not(:disabled) {
+    box-shadow: 0 2px 0 #cfc7ba;
+  }
+  
+  .lobby-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  
+  .lobby-page button:focus-visible,
+  .lobby-page input:focus-visible {
+    outline: 3px solid #2161b1;
+    outline-offset: 3px;
+  }
+  
+  /* ---------- code ---------- */
+  
+  .lobby-code-input {
+    display: block;
+  
+    width: calc(100% - 36px);
+    height: 68px;
+  
+    margin: 18px 18px 0;
+  
+    border: 3px solid #6e7881;
+    border-radius: 16px;
+  
+    background: #ffffff;
+    color: #161616;
+  
+    font-size: 36px;
+    letter-spacing: 10px;
+    text-align: center;
+  }
+  
+  .lobby-code-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  
+    padding: 18px 16px;
+  
+    border-radius: 28px;
+  
+    background: #2e3338;
+    color: #ffffff;
+  }
+  
+  .lobby-code-card__label {
+    color: #b4d77b;
+  
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+  
+  .lobby-code-card__code {
+    font-size: 54px;
+    font-weight: 300;
+    letter-spacing: 8px;
+    line-height: 1.1;
+  
+    /* keeps the digits readable when copied by hand */
+    user-select: all;
+  }
+  
+  .lobby-code-card__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  
+    margin-top: 6px;
+  }
+  
+  .lobby-chip {
+    height: 36px;
+    padding: 0 16px;
+  
+    border: 0;
+    border-radius: 999px;
+  
+    background: #ffb454;
+    color: #ffffff;
+  
+    font-size: 13px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  }
+  
+  /* ---------- status pill ---------- */
+  
+  .lobby-status {
+    padding: 14px 18px;
+  
+    border-radius: 999px;
+  
+    background: #2e3338;
+    color: #ffffff;
+  
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  /* ---------- players ---------- */
+  
+  .lobby-players {
+    margin: 0;
+    padding: 8px 12px 12px;
+  
+    list-style: none;
+  }
+  
+  .lobby-player {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  
+    padding: 8px 6px;
+  
+    border-bottom: 1px solid #e8e2d6;
+  }
+  
+  .lobby-player:last-child {
+    border-bottom: 0;
+  }
+  
+  .lobby-player__avatar {
+    flex-shrink: 0;
+  
+    width: 46px;
+    height: 46px;
+  
+    border-radius: 50%;
+    background: #fff3dc;
+  
+    image-rendering: pixelated;
+    object-fit: contain;
+  }
+  
+  .lobby-player__name {
+    flex: 1;
+  
+    min-width: 0;
+    overflow: hidden;
+  
+    font-size: 17px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .lobby-badge {
+    padding: 3px 9px;
+  
+    border-radius: 999px;
+  
+    background: #2e3338;
+    color: #ffffff;
+  
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  
+  .lobby-badge--you {
+    background: #b4d77b;
+    color: #26361a;
+  }
+  .lobby-player__avatar {
+    overflow: hidden;
+  }

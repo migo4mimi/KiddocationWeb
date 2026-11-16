@@ -1,0 +1,469 @@
+/* =========================================================
+   LOGIN, SIGN UP AND PASSWORD PAGES
+   Based on the "Sign In" frame in Figma.
+   Phones:  one column, the form only.
+   Tablets: a roomier card.
+   Laptops and PCs (960px and wider): an orange brand panel on the
+   left and the form on the right.
+   The colors come from the theme variables when they exist.
+========================================================= */
+
+.au {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  
+    min-height: 100vh;
+    min-height: 100dvh;
+  
+    overflow-x: hidden;
+  
+    background: var(--bg, #f4f1ea);
+    color: var(--text, #161616);
+  
+    font-family: var(--font-family, 'Poppins', system-ui, sans-serif);
+  }
+  
+  .au *,
+  .au *::before,
+  .au *::after {
+    box-sizing: border-box;
+  }
+  
+  /* ---------- brand panel (laptops and PCs only) ---------- */
+  
+  .au-brand {
+    display: none;
+  }
+  
+  /* ---------- the form side ---------- */
+  
+  .au-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    min-width: 0;
+    padding:
+      max(24px, env(safe-area-inset-top))
+      16px
+      max(24px, env(safe-area-inset-bottom));
+  }
+  
+  .au-card {
+    width: 100%;
+    max-width: 400px;
+  
+    min-width: 0;
+  }
+  
+  .au-logo {
+    display: block;
+  
+    width: clamp(110px, 34vw, 170px);
+    height: auto;
+  
+    margin: 0 auto 6px;
+  }
+  
+  .au-title {
+    margin: 8px 0 2px;
+  
+    font-size: clamp(30px, 8vw, 42px);
+    font-weight: 700;
+    line-height: 1.1;
+    text-align: center;
+  }
+  
+  .au-subtitle {
+    margin: 0 0 18px;
+  
+    color: var(--text-faint, #797878);
+  
+    font-size: 15px;
+    line-height: 1.5;
+    text-align: center;
+  }
+  
+  /* ---------- fields ---------- */
+  
+  .au-field {
+    display: block;
+  
+    margin-bottom: 14px;
+  }
+  
+  .au-field__label {
+    display: block;
+  
+    margin-bottom: 6px;
+  
+    color: var(--text-faint, #797878);
+  
+    font-size: 13px;
+    letter-spacing: 0.9px;
+  }
+  
+  .au-field__control {
+    display: block;
+  
+    width: 100%;
+    height: 52px;
+  
+    padding: 0 18px;
+  
+    border: 2px solid transparent;
+    border-radius: 17px;
+  
+    background: #4a4848;
+    color: #ffffff;
+  
+    font-family: inherit;
+    font-size: 16px;
+  }
+  
+  .au-field__control::placeholder {
+    color: #a9a6a6;
+  }
+  
+  .au-field__control:focus {
+    border-color: #ffbd59;
+    outline: none;
+  }
+  
+  select.au-field__control {
+    appearance: none;
+    -webkit-appearance: none;
+  
+    background-image: linear-gradient(45deg, transparent 50%, #ffffff 50%),
+      linear-gradient(135deg, #ffffff 50%, transparent 50%);
+    background-position:
+      calc(100% - 24px) 23px,
+      calc(100% - 18px) 23px;
+    background-size: 6px 6px;
+    background-repeat: no-repeat;
+  }
+  
+  /* ---------- buttons ---------- */
+  
+  .au-button {
+    display: block;
+  
+    width: 100%;
+    min-height: 52px;
+  
+    margin-top: 6px;
+    padding: 0 16px;
+  
+    border: 0;
+    border-radius: 17px;
+  
+    background: #ffbd59;
+    box-shadow: 0 5px 0 #ff7f27;
+    color: #ffffff;
+  
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  
+    cursor: pointer;
+  }
+  
+  .au-button:active:not(:disabled) {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #ff7f27;
+  }
+  
+  .au-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+  
+  /* ---------- OR + Google / Facebook ---------- */
+  
+  .au-or {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  
+    margin: 22px 0 14px;
+  
+    color: var(--text-faint, #797878);
+  
+    font-size: 14px;
+  }
+  
+  .au-or span {
+    flex: 1;
+    height: 1px;
+  
+    background: #d9d9d9;
+  }
+  
+  .au-or b {
+    font-weight: 600;
+  }
+  
+  .au-social {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .au-social__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  
+    min-width: 0;
+    min-height: 56px;
+  
+    padding: 0 10px;
+  
+    border: 0;
+    border-radius: 17px;
+  
+    background: #3d3a3b;
+    color: #ffbd59;
+  
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+  
+    cursor: pointer;
+  }
+  
+  .au-social__button svg {
+    flex-shrink: 0;
+  
+    width: 24px;
+    height: 24px;
+  }
+  
+  .au-social__button:hover:not(:disabled) {
+    background: #4a4748;
+  }
+  
+  .au-social__button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  /* ---------- messages and links ---------- */
+  
+  .au-notice {
+    margin: 0 0 12px;
+    padding: 11px 14px;
+  
+    border-radius: 12px;
+  
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+  }
+  
+  .au-notice--error {
+    background: var(--danger-soft, #ffe3e3);
+    color: var(--danger-text, #b3202a);
+  }
+  
+  .au-notice--success {
+    background: var(--success-soft, #e6f7ec);
+    color: var(--success-text, #1f7a3d);
+  }
+  
+  .au-hint {
+    margin: 0 0 14px;
+  
+    color: var(--text-soft, #5b5348);
+  
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  
+  .au-hint--center {
+    text-align: center;
+  }
+  
+  .au-hint a {
+    color: #d96a00;
+    word-break: break-all;
+  }
+  
+  .au-footer {
+    margin-top: 22px;
+  
+    color: var(--text-faint, #797878);
+  
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .au-footer p {
+    margin: 8px 0 0;
+  }
+  
+  .au-link {
+    padding: 4px;
+  
+    border: 0;
+    background: none;
+    color: var(--text-faint, #797878);
+  
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .au-link--strong {
+    color: var(--text, #161616);
+    font-weight: 600;
+  }
+  
+  /* ---------- student / teacher choice ---------- */
+  
+  .au-roles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  
+    margin-bottom: 16px;
+  }
+  
+  .au-role {
+    min-height: 46px;
+  
+    padding: 6px 8px;
+  
+    border: 2px solid var(--border, #d4cec5);
+    border-radius: 14px;
+  
+    background: var(--surface, #ffffff);
+    color: var(--text-soft, #5b5348);
+  
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+  
+    cursor: pointer;
+  }
+  
+  .au-role.is-on {
+    border-color: #ff8a00;
+    background: #ffb454;
+    color: #ffffff;
+  }
+  
+  .au button:focus-visible,
+  .au a:focus-visible {
+    outline: 3px solid #2161b1;
+    outline-offset: 2px;
+  }
+  
+  /* ---------- tablets ---------- */
+  
+  @media (min-width: 600px) {
+    .au-card {
+      padding: 28px 28px 24px;
+  
+      border-radius: 28px;
+  
+      background: var(--surface, #ffffff);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+    }
+  
+    .au-logo {
+      width: 170px;
+    }
+  }
+  
+  /* ---------- short screens (a phone turned sideways) ---------- */
+  
+  @media (max-height: 640px) {
+    .au-logo {
+      width: 84px;
+    }
+  
+    .au-panel {
+      align-items: flex-start;
+    }
+  }
+  
+  /* ---------- laptops and PCs ---------- */
+  
+  @media (min-width: 960px) {
+    .au {
+      grid-template-columns: minmax(340px, 1.05fr) minmax(420px, 1fr);
+    }
+  
+    .au-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  
+      padding: 48px;
+  
+      background-color: #ffb454;
+      background-image: conic-gradient(
+        #ffbb59 25%,
+        #ff8a4a 0 50%,
+        #ffbb59 0 75%,
+        #ff8a4a 0
+      );
+      background-size: 192px 192px;
+  
+      color: #ffffff;
+      text-align: center;
+    }
+  
+    .au-brand__logo {
+      width: min(260px, 60%);
+      height: auto;
+  
+      filter: drop-shadow(0 8px 0 rgba(120, 60, 0, 0.25));
+    }
+  
+    .au-brand h2 {
+      margin: 28px 0 8px;
+  
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1.15;
+      text-shadow: 0 3px 0 rgba(120, 60, 0, 0.3);
+    }
+  
+    .au-brand p {
+      max-width: 380px;
+      margin: 0;
+  
+      font-size: 17px;
+      line-height: 1.6;
+    }
+  
+    /* the logo already shows in the brand panel */
+    .au-logo {
+      display: none;
+    }
+  
+    .au-panel {
+      padding: 40px;
+    }
+  
+    .au-card {
+      max-width: 440px;
+      padding: 0;
+  
+      background: none;
+      box-shadow: none;
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .au-button:active:not(:disabled) {
+      transform: none;
+    }
+  }

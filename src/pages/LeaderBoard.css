@@ -1,0 +1,234 @@
+/* =========================================================
+   LEADERBOARD (the RANKS tab)
+   Orange ribbons for the top 3, red for the rest, like the
+   RANK frames in Figma.
+========================================================= */
+
+.lb {
+    flex: 1;
+  
+    width: 100%;
+    max-width: 412px;
+  
+    margin: 0 auto;
+    padding: 18px 16px 28px;
+  
+    font-family: var(--font-family, 'Poppins', system-ui, sans-serif);
+  }
+  
+  .lb button {
+    font-family: inherit;
+  }
+  
+  .lb-title {
+    margin: 4px 0 12px;
+  
+    color: #ff8a00;
+  
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .lb-tabs {
+    display: flex;
+    gap: 8px;
+  
+    margin-bottom: 8px;
+  }
+  
+  .lb-tab {
+    flex: 1;
+    height: 42px;
+  
+    border: 2px solid #d4cec5;
+    border-radius: 12px;
+  
+    background: #ffffff;
+    color: #5b5348;
+  
+    font-size: 15px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  }
+  
+  .lb-tab.is-active {
+    border-color: #ff8a00;
+    background: #ffb454;
+    color: #ffffff;
+  }
+  
+  .lb-tab:focus-visible {
+    outline: 3px solid #2161b1;
+    outline-offset: 2px;
+  }
+  
+  .lb-note {
+    margin: 4px 0 12px;
+  
+    color: #5b5348;
+  
+    font-size: 13px;
+    text-align: center;
+  }
+  
+  .lb-error {
+    margin: 0 0 12px;
+    padding: 10px 12px;
+  
+    border-radius: 10px;
+  
+    background: #ffe3e3;
+    color: #b3202a;
+  
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .lb-empty {
+    margin: 30px 0;
+  
+    color: #5b5348;
+  
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: center;
+  }
+  
+  .lb-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  
+    margin: 0;
+    padding: 0;
+  
+    list-style: none;
+  }
+  
+  .lb-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  
+    min-height: 62px;
+    padding: 0 14px;
+  
+    border-radius: 12px;
+  
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+  }
+  
+  .lb-row--top {
+    background: #ff9a3c;
+  }
+  
+  .lb-row--rest {
+    background: #b5252a;
+  }
+  
+  .lb-row.is-me {
+    outline: 3px solid #2e3338;
+  }
+  
+  .lb-row.has-gap {
+    margin-top: 10px;
+  }
+  
+  .lb-row__place {
+    width: 28px;
+  
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .lb-row__avatar {
+    flex-shrink: 0;
+  
+    width: 44px;
+    height: 44px;
+  
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+  
+    overflow: hidden;
+  }
+  
+  .lb-row__who {
+    flex: 1;
+  
+    display: flex;
+    flex-direction: column;
+  
+    min-width: 0;
+  }
+  
+  .lb-row__name {
+    overflow: hidden;
+  
+    font-size: 17px;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .lb-row__meta {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+  
+  .lb-row__points {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  
+  .lb-me {
+    margin: 16px 0 0;
+    padding: 10px 14px;
+  
+    border-radius: 999px;
+  
+    background: #2e3338;
+    color: #ffffff;
+  
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .lb-help {
+    margin: 14px 0 0;
+  
+    color: #5b5348;
+  
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  html[data-theme='dark'] .lb-note,
+  html[data-theme='dark'] .lb-empty,
+  html[data-theme='dark'] .lb-help {
+    color: #e4e6eb;
+  }
+
+  html[data-theme='dark'] .lb-tab.is-active {
+    border-color: #ff8a00;
+    background: #a9500a;
+    color: #ffffff;
+  }
+
+  html[data-theme='dark'] .lb-row--top {
+    background: #a9500a;
+  }
+
+  html[data-theme='dark'] .lb-row.is-me {
+    outline-color: #f1f3f5;
+  }
+
+  html[data-theme='dark'] .lb-me {
+    border: 1px solid #69717a;
+    background: #24272b;
+  }

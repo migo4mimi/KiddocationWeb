@@ -1,0 +1,415 @@
+/* =========================================================
+   LEARNING PACKET
+   Based on the "LEARNING POCKET" frame in Figma: an orange header
+   card, white lesson cards with a small chip, light blue panels,
+   orange callouts, and a PLAY button.
+========================================================= */
+
+.lp {
+    min-height: 100vh;
+    min-height: 100dvh;
+  
+    background: #f6f8fe;
+    color: #161616;
+  
+    font-family: var(--font-family, 'Poppins', system-ui, sans-serif);
+  }
+  
+  .lp button {
+    font-family: inherit;
+  }
+  
+  .lp-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  
+    padding: 10px 16px;
+  
+    background: #f6f8fe;
+  }
+  
+  .lp-back {
+    width: 36px;
+    height: 36px;
+  
+    border: 0;
+    border-radius: 50%;
+  
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+  
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .lp-progress {
+    flex: 1;
+    height: 12px;
+  
+    border-radius: 999px;
+  
+    background: #e4e8f5;
+    overflow: hidden;
+  }
+  
+  .lp-progress span {
+    display: block;
+    height: 100%;
+  
+    border-radius: 999px;
+  
+    background: #ffb84d;
+    transition: width 0.1s linear;
+  }
+  
+  .lp-column {
+    width: 100%;
+    max-width: 520px;
+  
+    margin: 0 auto;
+    padding: 6px 12px 40px;
+  }
+  
+  /* ---------- orange header ---------- */
+  
+  .lp-hero {
+    padding: 18px 20px 20px;
+  
+    border-radius: 10px;
+  
+    background: #fba33c;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+  }
+  
+  .lp-hero__chip {
+    display: inline-block;
+  
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+  }
+  
+  .lp-hero h1 {
+    margin: 8px 0 6px;
+  
+    font-size: 26px;
+    line-height: 1.2;
+  }
+  
+  .lp-hero p {
+    margin: 0;
+  
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  /* ---------- lesson cards ---------- */
+  
+  .lp-card {
+    margin-top: 18px;
+    padding: 16px 16px 18px;
+  
+    border-radius: 10px;
+  
+    background: #ffffff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  .lp-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  
+    margin-bottom: 12px;
+  }
+  
+  .lp-chip__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 37px;
+    height: 26px;
+  
+    border-radius: 10px;
+  
+    background: rgba(255, 189, 89, 0.35);
+  
+    font-size: 15px;
+  }
+  
+  .lp-chip h2 {
+    margin: 0;
+  
+    font-size: 17px;
+    font-weight: 700;
+  }
+  
+  .lp-panel {
+    padding: 14px;
+  
+    border-radius: 10px;
+  
+    background: #f3f5ff;
+  }
+  
+  .lp-text {
+    margin: 10px 2px 0;
+  
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  /* ---------- counting pictures ---------- */
+  
+  .lp-visual {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .lp-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  
+    max-width: 170px;
+  }
+  
+  .lp-group--box {
+    padding: 6px;
+  
+    border: 2px dashed #ffb84d;
+    border-radius: 10px;
+  }
+  
+  .lp-grid {
+    display: grid;
+    gap: 4px;
+  }
+  
+  .lp-sq {
+    display: block;
+  
+    width: 24px;
+    height: 24px;
+  
+    border-radius: 6px;
+  }
+  
+  .lp-sq--dark {
+    background: #ffb84d;
+  }
+  
+  .lp-sq--light {
+    background: #ffd98f;
+  }
+  
+  .lp-sq.is-gone {
+    position: relative;
+  
+    background: #e6e2da;
+  }
+  
+  .lp-sq.is-gone::after {
+    content: '✕';
+  
+    position: absolute;
+    inset: 0;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    color: #b3202a;
+  
+    font-size: 14px;
+    font-weight: 700;
+  }
+  
+  .lp-sign {
+    font-size: 26px;
+    font-weight: 700;
+  }
+  
+  .lp-total {
+    font-size: 26px;
+  }
+  
+  /* ---------- steps ---------- */
+  
+  .lp-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  
+    margin: 0;
+    padding: 0;
+  
+    list-style: none;
+  }
+  
+  .lp-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .lp-step__number {
+    flex-shrink: 0;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 28px;
+    height: 28px;
+  
+    border-radius: 50%;
+  
+    background: #ffb84d;
+    color: #ffffff;
+  
+    font-weight: 700;
+  }
+  
+  /* ---------- the big example, like "6 + 5 = 11" ---------- */
+  
+  .lp-example {
+    display: flex;
+    justify-content: center;
+  
+    padding: 8px 0 4px;
+  }
+  
+  .lp-example__sum {
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+  
+  .lp-example__sum b {
+    color: #ff8a00;
+  }
+  
+  /* ---------- orange callouts ---------- */
+  
+  .lp-callout {
+    margin: 0 0 8px;
+    padding: 14px 16px;
+  
+    border-left: 6px solid #ffb84d;
+    border-radius: 10px;
+  
+    background: #fff8e8;
+  
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .lp-callout:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* ---------- play ---------- */
+  
+  .lp-play {
+    display: block;
+  
+    width: 171px;
+    height: 50px;
+  
+    margin: 30px auto 0;
+  
+    border: 0;
+    border-radius: 10px;
+  
+    background: #fff8e8;
+    box-shadow: 0 0 0 4px #ffb84d;
+    color: #000000;
+  
+    font-size: 26px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .lp-play:hover {
+    background: #ffffff;
+  }
+
+  .lp-play--long {
+    box-sizing: border-box;
+    width: min(100%, 320px);
+    height: auto;
+    min-height: 50px;
+    padding: 8px 14px;
+    font-size: clamp(14px, 4.7vw, 22px);
+    line-height: 1.2;
+    white-space: normal;
+  }
+  
+  .lp-play:focus-visible,
+  .lp-back:focus-visible {
+    outline: 3px solid #2161b1;
+    outline-offset: 3px;
+  }
+  
+  .lp-footer {
+    margin: 22px 0 0;
+  
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .lp-video__frame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #1d2722;
+  }
+
+  .lp-video__frame video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .lp-video__missing {
+    margin: 0;
+    padding: 14px;
+    border-radius: 10px;
+    background: #fff3dc;
+    color: #5b5348;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .lp-video__missing code {
+    font-size: 0.9em;
+  }
+
+  .lp-continue-error {
+    margin: 18px 0 0;
+    color: #a62626;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .lp-play:disabled {
+    opacity: 0.7;
+    cursor: wait;
+  }

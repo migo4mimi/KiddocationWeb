@@ -1,95 +1,98 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
-import AuthInput from '../components/AuthInput';
-import PrimaryButton from '../components/PrimaryButton';
-import './Login.css';
+import { authErrorText, signInWithProvider } from '../lib/Oauth';
+import { AuthButton, AuthShell, Field, Notice, SocialButtons } from './Authkit';
 
-export default function Login({ onNavigateToSignup }) {
+export default function Login({
+  onNavigateToSignup,
+  onNavigateToForgot,
+  initialError = '',
+}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [provider, setProvider] = useState(null);
+  const [error, setError] = useState(initialError);
 
-  async function handleLogin(e) {
-    e.preventDefault();
-    setErrorMessage('');
+  async function handleLogin(event) {
+    event.preventDefault();
+    setError('');
 
     if (!email || !password) {
-      setErrorMessage('Please fill in both fields.');
+      setError('Please fill in both fields.');
       return;
     }
 
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    const { error: problem } = await supabase.auth.signInWithPassword({
+      email: email.trim(),
+      password,
+    });
+
     setLoading(false);
 
-    if (error) {
-      // Supabase's own message is technical; a friendlier one matches the Figma error state.
-      setErrorMessage('Incorrect email or password.');
-      return;
-    }
+    // On success App.jsx notices the new session and opens the right page.
+    if (problem) setError(authErrorText(problem));
+  }
 
-    // No manual navigation needed here - App.jsx listens for the auth
-    // state change and will switch to the Home page automatically.
+  async function handleProvider(name) {
+    setError('');
+    setProvider(name);
+
+    const problem = await signInWithProvider(name);
+
+    // When it works the browser leaves for Google or Facebook.
+    if (problem) {
+      setError(problem);
+      setProvider(null);
+    }
   }
 
   return (
-    <div className="login-page">
-      <div className="login-card">
-        <div className="login-logo">
-          <span className="login-logo__letter">K</span>
-        </div>
-
-        <h1 className="login-title">Login</h1>
-        <p className="login-subtitle">Sign in to continue.</p>
-
-        <form onSubmit={handleLogin}>
-          <AuthInput
-            label="EMAIL"
-            type="email"
-            value={email}
-            onChange={setEmail}
-            placeholder="you@example.com"
-            required
-          />
-          <AuthInput
-            label="PASSWORD"
-            type="password"
-            value={password}
-            onChange={setPassword}
-            placeholder="••••••"
-            required
-          />
-
-          {errorMessage && <p className="login-error">{errorMessage}</p>}
-
-          <PrimaryButton type="submit" loading={loading}>
-            LOG IN
-          </PrimaryButton>
-        </form>
-
-        <div className="login-divider">
-          <span className="login-divider__line" />
-          <span className="login-divider__text">OR</span>
-          <span className="login-divider__line" />
-        </div>
-
-        <div className="login-social-row">
-          <button className="login-social-button" disabled title="Coming later">
-            GOOGLE
+    <AuthShell
+      title="Login"
+      subtitle="Sign in to continue."
+      footer={
+        <>
+          <button type="button" className="au-link" onClick={onNavigateToForgot}>
+            Forgot Password?
           </button>
-          <button className="login-social-button" disabled title="Coming later">
-            FACEBOOK
-          </button>
-        </div>
+          <p>
+            Don&apos;t have an account?{' '}
+            <button type="button" className="au-link au-link--strong" onClick={onNavigateToSignup}>
+              Sign up!
+            </button>
+          </p>
+        </>
+      }
+    >
+      <form onSubmit={handleLogin} noValidate>
+        <Field
+          label="EMAIL"
+          type="email"
+          autoComplete="email"
+          value={email}
+          onChange={setEmail}
+          placeholder="you@example.com"
+        />
+        <Field
+          label="PASSWORD"
+          type="password"
+          autoComplete="current-password"
+          value={password}
+          onChange={setPassword}
+          placeholder="••••••"
+        />
 
-        <p className="login-signup-link">
-          Don&apos;t have an account?{' '}
-          <button type="button" className="login-signup-link__button" onClick={onNavigateToSignup}>
-            Sign up!
-          </button>
-        </p>
-      </div>
-    </div>
+        <Notice>{error}</Notice>
+
+        <AuthButton type="submit" loading={loading}>
+          LOG IN
+        </AuthButton>
+      </form>
+
+      <SocialButtons onProvider={handleProvider} busy={provider} disabled={loading} />
+    </AuthShell>
   );
 }

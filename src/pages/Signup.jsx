@@ -1,106 +1,131 @@
 import { useState } from 'react';
-import { supabase } from '../lib/supabase';
-import AuthInput from '../components/AuthInput';
-import PrimaryButton from '../components/PrimaryButton';
-import './Signup.css';
+import { signInWithProvider } from '../lib/Oauth';
+import { ADMIN_EMAIL, teacherRequestLink } from '../lib/staff';
+import { AuthButton, AuthShell, Field, Notice, SocialButtons } from './Authkit';
 
 const GRADE_OPTIONS = [1, 2, 3, 4, 5, 6];
 
-export default function Signup({ onNavigateToLogin }) {
+export default function Signup({ onNavigateToLogin, onSignup }) {
+  const [role, setRole] = useState('student');
   const [name, setName] = useState('');
   const [grade, setGrade] = useState('1');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [confirmationMessage, setConfirmationMessage] = useState('');
+  const [provider, setProvider] = useState(null);
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
 
-  async function handleSignup(e) {
-    e.preventDefault();
-    setErrorMessage('');
-    setConfirmationMessage('');
+  const isTeacher = role === 'teacher';
+
+  async function handleSignup(event) {
+    event.preventDefault();
+    setError('');
+    setMessage('');
 
     if (!name || !email || !password) {
-      setErrorMessage('Please fill in every field.');
+      setError('Please fill in every field.');
       return;
     }
     if (password.length < 6) {
-      setErrorMessage('Password should be at least 6 characters.');
+      setError('Password should be at least 6 characters.');
       return;
     }
 
     setLoading(true);
 
-    // name/grade are passed as user metadata, not written directly to
-    // `profiles` here - your existing Auth trigger reads this metadata
-    // to create the profile row, so we don't duplicate that insert.
-    const { data, error } = await supabase.auth.signUp({
-      email,
+    // Name and grade are saved with the account. Teachers have no grade and
+    // wait for an admin to approve them.
+    const result = await onSignup({
+      name,
+      grade: isTeacher ? null : Number(grade),
+      email: email.trim(),
       password,
-      options: {
-        data: {
-          name,
-          grade: Number(grade),
-        },
-      },
+      wantsTeacher: isTeacher,
     });
 
     setLoading(false);
 
-    if (error) {
-      setErrorMessage(error.message);
-      return;
-    }
+    if (result?.error) setError(result.error);
+    else if (result?.message) setMessage(result.message);
+  }
 
-    if (!data.session) {
-      // Email confirmation is turned on in your Supabase project - no
-      // session comes back yet, so send them to Login instead of Home.
-      setConfirmationMessage('Account created! Check your email to confirm, then log in.');
+  async function handleProvider(providerName) {
+    setError('');
+    setProvider(providerName);
+
+    const problem = await signInWithProvider(providerName);
+
+    if (problem) {
+      setError(problem);
+      setProvider(null);
     }
-    // If a session DID come back (confirmation off), App.jsx's
-    // onAuthStateChange picks it up and moves straight to Home.
   }
 
   return (
-    <div className="signup-page">
-      <div className="signup-card">
-        <button type="button" className="signup-back-button" onClick={onNavigateToLogin} aria-label="Back to login">
-          ←
+    <AuthShell
+      title="Create new Account"
+      subtitle="Choose who you are, then fill in your details."
+      footer={
+        <p>
+          Already have an account?{' '}
+          <button type="button" className="au-link au-link--strong" onClick={onNavigateToLogin}>
+            Log in
+          </button>
+        </p>
+      }
+    >
+      <div className="au-roles" role="group" aria-label="Who are you?">
+        <button
+          type="button"
+          className={`au-role ${!isTeacher ? 'is-on' : ''}`}
+          onClick={() => setRole('student')}
+          aria-pressed={!isTeacher}
+        >
+          I am a student
         </button>
+        <button
+          type="button"
+          className={`au-role ${isTeacher ? 'is-on' : ''}`}
+          onClick={() => setRole('teacher')}
+          aria-pressed={isTeacher}
+        >
+          I am a teacher
+        </button>
+      </div>
 
-        <h1 className="signup-title">
-          Create new
-          <br />
-          <span className="signup-title__accent">Account</span>
-        </h1>
+      <form onSubmit={handleSignup} noValidate>
+        <Field label="NAME" type="text" autoComplete="nickname" value={name} onChange={setName} placeholder="Your name or nickname" maxLength={30} />
+        <Field label="EMAIL" type="email" autoComplete="email" value={email} onChange={setEmail} placeholder="you@example.com" />
+        <Field label="PASSWORD" type="password" autoComplete="new-password" value={password} onChange={setPassword} placeholder="At least 6 characters" />
 
-        <form onSubmit={handleSignup}>
-          <AuthInput label="NAME" type="text" value={name} onChange={setName} placeholder="Your name" required />
-          <AuthInput label="EMAIL" type="email" value={email} onChange={setEmail} placeholder="you@example.com" required />
-          <AuthInput
-            label="PASSWORD"
-            type="password"
-            value={password}
-            onChange={setPassword}
-            placeholder="At least 6 characters"
-            required
-          />
-          <AuthInput label="GRADE" as="select" value={grade} onChange={setGrade}>
-            {GRADE_OPTIONS.map((g) => (
-              <option key={g} value={g}>
-                Grade {g}
+        {!isTeacher && (
+          <Field label="GRADE" as="select" value={grade} onChange={setGrade}>
+            {GRADE_OPTIONS.map((value) => (
+              <option key={value} value={value}>
+                Grade {value}
               </option>
             ))}
-          </AuthInput>
+          </Field>
+        )}
 
-          {errorMessage && <p className="signup-error">{errorMessage}</p>}
-          {confirmationMessage && <p className="signup-confirmation">{confirmationMessage}</p>}
+        {isTeacher && (
+          <p className="au-hint">
+            Teacher accounts need approval. After you sign up, an admin approves
+            you inside the app. You can also ask by email:{' '}
+            <a href={teacherRequestLink({ name, email })}>{ADMIN_EMAIL}</a>
+          </p>
+        )}
 
-          <PrimaryButton type="submit" loading={loading}>
-            SIGN UP
-          </PrimaryButton>
-        </form>
-      </div>
-    </div>
+        <Notice>{error}</Notice>
+        <Notice kind="success">{message}</Notice>
+
+        <AuthButton type="submit" loading={loading}>
+          {isTeacher ? 'REQUEST TEACHER ACCOUNT' : 'SIGN UP'}
+        </AuthButton>
+      </form>
+
+      <SocialButtons onProvider={handleProvider} busy={provider} disabled={loading} />
+    </AuthShell>
   );
 }

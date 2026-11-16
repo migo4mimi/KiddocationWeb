@@ -1,0 +1,290 @@
+.friends-screen {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 412px;
+  margin: 0 auto;
+  padding: 14px 18px 28px;
+  color: #173c59;
+  font-family: var(--font-family, 'Poppins', system-ui, sans-serif);
+}
+
+.friends-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.friends-heading h1,
+.friends-chat__heading h2,
+.friends-list h2 {
+  margin: 0;
+  color: #173c59;
+}
+
+.friends-heading h1 {
+  font-size: 25px;
+}
+
+.friends-back,
+.friends-chat__heading > button:first-child {
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: #e4efd3;
+  color: #173c59;
+  cursor: pointer;
+}
+
+.friends-screen button {
+  font: inherit;
+}
+
+.friends-screen button:focus-visible,
+.friends-screen input:focus-visible,
+.friends-screen textarea:focus-visible {
+  outline: 3px solid #2161b1;
+  outline-offset: 2px;
+}
+
+.friends-search,
+.friends-list,
+.friends-chat {
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px solid #d5dfcc;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.friends-search label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.friends-search > div {
+  display: flex;
+  gap: 7px;
+}
+
+.friends-search input {
+  box-sizing: border-box;
+  min-width: 0;
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #bac8d0;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.friends-screen button[type='submit'],
+.friends-row button,
+.friends-chat__composer > button {
+  padding: 8px 11px;
+  border: 0;
+  border-radius: 8px;
+  background: #2161b1;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.friends-screen button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.friends-list h2 {
+  margin-bottom: 8px;
+  font-size: 17px;
+}
+
+.friends-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 42px;
+  border-top: 1px solid #edf0e9;
+}
+
+.friends-row:first-of-type {
+  border-top: 0;
+}
+
+.friends-row > span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.friends-row__actions {
+  display: flex;
+  gap: 6px;
+}
+
+.friends-row .friends-button--quiet {
+  background: #e9eef2;
+  color: #173c59;
+}
+
+.friends-row__status {
+  color: #667580;
+  font-size: 13px;
+}
+
+.friends-message {
+  margin: 8px 0;
+  padding: 9px 11px;
+  border-radius: 8px;
+  background: #e8f2dd;
+  color: #244b24;
+  font-size: 14px;
+}
+
+.friends-message--error {
+  background: #fff0ed;
+  color: #9e2f1e;
+}
+
+.friends-empty {
+  margin: 7px 0;
+  color: #667580;
+  font-size: 14px;
+}
+
+.friends-chat {
+  display: flex;
+  flex-direction: column;
+  height: min(60vh, 570px);
+  padding: 10px;
+}
+
+.friends-chat__heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 2px 10px;
+  border-bottom: 1px solid #e6ebe2;
+}
+
+.friends-chat__heading h2 {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  font-size: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.friends-chat__heading .friends-chat__action {
+  padding: 5px 7px;
+  border: 0;
+  border-radius: 7px;
+  background: #e9eef2;
+  color: #173c59;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.friends-chat__heading .friends-chat__action--block {
+  background: #fff0ed;
+  color: #9e2f1e;
+}
+
+.friends-chat__messages {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  padding: 12px 4px;
+}
+
+.friends-chat__message {
+  position: relative;
+  max-width: 82%;
+  align-self: flex-start;
+  padding: 8px 10px 19px;
+  border-radius: 12px 12px 12px 3px;
+  background: #edf2e8;
+  overflow-wrap: anywhere;
+}
+
+.friends-chat__message.is-mine {
+  align-self: flex-end;
+  border-radius: 12px 12px 3px 12px;
+  background: #e4efff;
+}
+
+.friends-chat__message p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.friends-chat__message time {
+  position: absolute;
+  right: 7px;
+  bottom: 3px;
+  color: #64727c;
+  font-size: 10px;
+}
+
+.friends-chat__message > button {
+  margin-top: 5px;
+  padding: 2px 5px;
+  border: 0;
+  background: transparent;
+  color: #9e2f1e;
+  font-size: 11px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.friends-chat__composer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px;
+  padding-top: 9px;
+  border-top: 1px solid #e6ebe2;
+}
+
+.friends-chat__composer textarea {
+  box-sizing: border-box;
+  width: 100%;
+  resize: vertical;
+  padding: 8px;
+  border: 1px solid #bac8d0;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.friends-chat__composer > button {
+  align-self: start;
+}
+
+.friends-chat__composer small {
+  grid-column: 1 / -1;
+  color: #667580;
+  font-size: 11px;
+}
+
+.friends-blocked__toggle {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #2161b1;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.friends-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}

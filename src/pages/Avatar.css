@@ -1,0 +1,26 @@
+.avatar {
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: center;
+  
+    font-style: normal;
+    overflow: hidden;
+  }
+  
+  .avatar__crop {
+    position: relative;
+  
+    display: block;
+    overflow: hidden;
+  
+    font-style: normal;
+  }
+  
+  .avatar__img {
+    position: absolute;
+  
+    display: block;
+    max-width: none;
+  
+    image-rendering: pixelated;
+  }

@@ -1,0 +1,742 @@
+/* =========================================================
+   HOME SCREEN
+   Based on the "Home Screen" frame in Figma (412 x 917).
+   Every size uses --u, which is 1 design pixel.
+========================================================= */
+
+.hm-page {
+  background: var(--color-bg, #f4f1ea);
+  font-family: var(--font-family, 'Poppins', system-ui, sans-serif);
+}
+
+.hm-stage {
+  max-width: 412px;
+  height: 100%;
+  min-height: 0;
+
+  margin: 0 auto;
+
+  container-type: inline-size;
+  background: var(--color-bg, #f4f1ea);
+}
+
+.hm-inner {
+  --u: min(calc(100cqw / 412), calc(100dvh / 930));
+
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  min-height: 0;
+}
+
+.hm-inner button {
+  font-family: inherit;
+}
+
+.hm-inner button:focus-visible {
+  outline: 3px solid #2161b1;
+  outline-offset: 2px;
+}
+
+.hm-defs {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* ---------- header: name, level, XP bar, points ---------- */
+
+.hm-header {
+  position: relative;
+
+  flex-shrink: 0;
+  height: calc(100 * var(--u));
+}
+
+.hm-back {
+  position: absolute;
+  left: calc(12 * var(--u));
+  top: calc(14 * var(--u));
+  z-index: 3;
+
+  width: calc(36 * var(--u));
+  height: calc(34 * var(--u));
+
+  border: 0;
+  background: none;
+
+  font-size: calc(26 * var(--u));
+  line-height: 1;
+  cursor: pointer;
+}
+
+.hm-pill {
+  position: absolute;
+  left: calc(67 * var(--u));
+  top: calc(20 * var(--u));
+
+  box-sizing: border-box;
+  width: calc(170 * var(--u));
+  height: calc(50 * var(--u));
+
+  padding-left: calc(46 * var(--u));
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1px solid #000000;
+  border-radius: calc(10 * var(--u));
+
+  background: #ffffff;
+}
+
+.hm-pill__name {
+  color: #8fb856;
+
+  font-size: calc(20 * var(--u));
+  line-height: 1.1;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hm-pill__level {
+  color: #818080;
+
+  font-size: calc(15 * var(--u));
+  line-height: 1.2;
+}
+
+.hm-initial {
+  position: absolute;
+  left: calc(33 * var(--u));
+  top: calc(20 * var(--u));
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: calc(74 * var(--u));
+  height: calc(74 * var(--u));
+
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+
+  border-radius: 50%;
+  overflow: hidden;
+
+  background: #08284b;
+  color: #2161b1;
+
+  font-size: calc(40 * var(--u));
+  letter-spacing: calc(4 * var(--u));
+  cursor: pointer;
+}
+
+.hm-initial:focus-visible {
+  outline: 3px solid #ff8a00;
+  outline-offset: 3px;
+}
+
+.hm-initial__picture {
+  display: flex;
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #08284b;
+}
+
+.hm-friends-button {
+  min-height: calc(44 * var(--u));
+  margin-top: calc(12 * var(--u));
+  padding: 0 calc(18 * var(--u));
+  border: 0;
+  border-radius: calc(12 * var(--u));
+  background: #2161b1;
+  color: #ffffff;
+  font-size: calc(15 * var(--u));
+  font-weight: 700;
+  letter-spacing: calc(0.5 * var(--u));
+  cursor: pointer;
+}
+
+.hm-xp {
+  position: absolute;
+  left: calc(110 * var(--u));
+  top: calc(76 * var(--u));
+
+  width: calc(114 * var(--u));
+  height: calc(12 * var(--u));
+
+  border-radius: 999px;
+
+  background: #2b1a0b;
+
+  overflow: hidden;
+}
+
+.hm-xp span {
+  display: block;
+  height: 100%;
+
+  border-radius: 999px;
+
+  background: #ff8a00;
+}
+
+.hm-points {
+  position: absolute;
+  left: calc(280 * var(--u));
+  top: calc(27 * var(--u));
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  width: calc(99 * var(--u));
+  height: calc(40 * var(--u));
+
+  border-radius: calc(3 * var(--u));
+
+  background: #b4d77b;
+  color: #2f4a12;
+
+  font-size: calc(19 * var(--u));
+  white-space: nowrap;
+}
+
+/* ---------- the home view ---------- */
+
+.hm-main {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: calc(94 * var(--u));
+}
+
+.hm-avatar {
+  flex-shrink: 0;
+
+  display: block;
+  width: calc(295 * var(--u));
+  height: calc(295 * var(--u));
+
+  padding: 0;
+
+  border: 0;
+  background: none;
+
+  cursor: pointer;
+
+  transition: transform 0.18s ease;
+}
+
+.hm-avatar:hover {
+  transform: translateY(calc(-3 * var(--u)));
+}
+
+.hm-avatar .avatar {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- mode selector ----------
+   Ranked:           [ RANKED ] [ play button ] [ MODE ]
+   Practice, Custom: [   PRACTICE (wide)     ]  [ MODE ]
+   "MODE" switches to the next mode (like your Figma). */
+
+.hm-modes {
+  position: relative;
+
+  flex-shrink: 0;
+  width: calc(371 * var(--u));
+  height: calc(78 * var(--u));
+
+  margin-top: calc(51 * var(--u));
+}
+
+.hm-tile {
+  position: absolute;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  padding: 0;
+
+  border: 0;
+  background: none;
+
+  color: #ffffff;
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* the slanted orange shape: an orange edge with a lighter fill inside */
+.hm-tile::before,
+.hm-tile::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.hm-tile::before {
+  inset: 0;
+
+  background: #ff8a00;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    calc(100% - 10 * var(--u)) 100%,
+    calc(10 * var(--u)) 100%
+  );
+}
+
+.hm-tile::after {
+  inset: calc(3 * var(--u));
+
+  background: linear-gradient(#ffc861, #ffa52f);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    calc(100% - 8.5 * var(--u)) 100%,
+    calc(8.5 * var(--u)) 100%
+  );
+}
+
+.hm-tile:hover::after {
+  filter: brightness(1.06);
+}
+
+.hm-tile span {
+  position: relative;
+  z-index: 1;
+
+  font-size: calc(26 * var(--u));
+  text-shadow: 0 calc(1 * var(--u)) 0 rgba(120, 60, 0, 0.3);
+}
+
+/* the big tile with the mode name: it grows when the play button hides */
+.hm-tile--main {
+  left: 0;
+  width: calc(170 * var(--u));
+
+  transition: width 0.25s ease;
+}
+
+.hm-modes.is-wide .hm-tile--main {
+  width: calc(263 * var(--u));
+}
+
+/* the tile behind the play button (Ranked only) */
+.hm-tile--center {
+  left: calc(170 * var(--u));
+  width: calc(100 * var(--u));
+
+  transition: opacity 0.2s ease;
+}
+
+.hm-modes.is-wide .hm-tile--center {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* "MODE": goes to the next mode */
+.hm-tile--right {
+  left: calc(270 * var(--u));
+  width: calc(101 * var(--u));
+}
+
+.hm-tile--right span {
+  font-size: calc(20 * var(--u));
+}
+
+.hm-play {
+  position: absolute;
+  left: calc(171 * var(--u));
+  top: calc(-36 * var(--u));
+  z-index: 2;
+
+  width: calc(98 * var(--u));
+  height: calc(98 * var(--u));
+
+  padding: 0;
+
+  border: 0;
+  background: none;
+
+  cursor: pointer;
+
+  filter: drop-shadow(0 calc(4 * var(--u)) calc(4 * var(--u)) rgba(0, 0, 0, 0.3));
+  transition:
+    transform 0.15s ease,
+    opacity 0.2s ease;
+}
+
+.hm-modes.is-wide .hm-play {
+  opacity: 0;
+  pointer-events: none;
+
+  transform: scale(0.6);
+}
+
+.hm-play:hover {
+  transform: scale(1.06);
+}
+
+.hm-play:active {
+  transform: scale(0.96);
+}
+
+.hm-play img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.hm-description {
+  margin: calc(2 * var(--u)) 0 0;
+
+  color: #000000;
+
+  font-size: calc(11 * var(--u));
+  text-align: center;
+}
+
+.hm-hint {
+  margin: calc(22 * var(--u)) 0 0;
+
+  color: #000000;
+
+  font-size: calc(15.1 * var(--u));
+  letter-spacing: calc(1.51 * var(--u));
+}
+
+.hm-learning-pocket {
+  margin-top: calc(12 * var(--u));
+  padding: calc(8 * var(--u)) calc(14 * var(--u));
+  border: 2px solid #6f9b37;
+  border-radius: calc(12 * var(--u));
+  background: #edf7e4;
+  color: #426b20;
+  font-size: calc(13 * var(--u));
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hm-learning-pocket:hover {
+  background: #e0efcf;
+}
+
+/* ---------- ranks (placeholder) ---------- */
+
+.hm-message {
+  flex: 1;
+
+  padding: calc(60 * var(--u)) calc(24 * var(--u));
+
+  text-align: center;
+}
+
+.hm-message h2 {
+  margin: 0 0 calc(8 * var(--u));
+
+  font-size: calc(28 * var(--u));
+}
+
+.hm-message p {
+  margin: 0;
+
+  color: #5b5348;
+
+  font-size: calc(15 * var(--u));
+}
+
+/* ---------- bottom bar: avatar, ranks, settings ---------- */
+
+.hm-nav {
+  flex-shrink: 0;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  box-sizing: border-box;
+  height: calc(142 * var(--u));
+
+  border: 0;
+  background: #344354;
+  border-top: 2px solid #707985;
+}
+
+.hm-nav__item {
+  position: relative;
+
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+
+  cursor: pointer;
+}
+
+.hm-nav__item + .hm-nav__item {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+.hm-nav__item.is-active {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.hm-nav__item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.hm-nav__icon {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: block;
+}
+
+.hm-nav__icon--avatar {
+  top: calc(23 * var(--u));
+
+  width: calc(63 * var(--u));
+  height: calc(63 * var(--u));
+}
+
+.hm-nav__icon--avatar .avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.hm-nav__icon--star {
+  top: calc(28 * var(--u));
+
+  width: calc(57 * var(--u));
+  height: calc(54 * var(--u));
+}
+
+.hm-nav__icon--gear {
+  top: calc(28 * var(--u));
+
+  width: calc(61 * var(--u));
+  height: calc(58 * var(--u));
+}
+
+.hm-layer {
+  position: absolute;
+  display: block;
+}
+
+.hm-layer img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  max-width: none;
+}
+
+.hm-box {
+  position: absolute;
+  display: block;
+}
+
+.hm-gear {
+  position: absolute;
+
+  width: calc(55 * var(--u));
+  height: calc(55 * var(--u));
+
+  max-width: none;
+  pointer-events: none;
+}
+
+.hm-gear--back {
+  left: 0;
+  top: calc(3 * var(--u));
+
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.hm-gear--front {
+  left: calc(6 * var(--u));
+  top: 0;
+
+  object-fit: cover;
+}
+
+.hm-nav__label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(86 * var(--u));
+
+  font-size: calc(15.1 * var(--u));
+  letter-spacing: calc(1.51 * var(--u));
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-avatar,
+  .hm-play {
+    transition: none;
+  }
+}
+/* ---------- mode selector (tiles and play button) ---------- */
+
+.hm-modes {
+  position: relative;
+
+  flex-shrink: 0;
+  width: calc(371 * var(--u));
+  height: calc(78 * var(--u));
+
+  margin-top: calc(51 * var(--u));
+}
+
+.hm-tile {
+  position: absolute;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  padding: 0;
+
+  border: 0;
+  background: none;
+
+  color: #ffffff;
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hm-tile::before,
+.hm-tile::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.hm-tile::before {
+  inset: 0;
+
+  background: #ff8a00;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 10 * var(--u)) 100%, calc(10 * var(--u)) 100%);
+}
+
+.hm-tile::after {
+  inset: calc(3 * var(--u));
+
+  background: linear-gradient(#ffc861, #ffa52f);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 8.5 * var(--u)) 100%, calc(8.5 * var(--u)) 100%);
+}
+
+.hm-tile span {
+  position: relative;
+  z-index: 1;
+
+  font-size: calc(26 * var(--u));
+  text-shadow: 0 calc(1 * var(--u)) 0 rgba(120, 60, 0, 0.3);
+}
+
+.hm-tile--main {
+  left: 0;
+  width: calc(170 * var(--u));
+
+  transition: width 0.25s ease;
+}
+
+.hm-modes.is-wide .hm-tile--main {
+  width: calc(263 * var(--u));
+}
+
+.hm-tile--center {
+  left: calc(170 * var(--u));
+  width: calc(100 * var(--u));
+
+  transition: opacity 0.2s ease;
+}
+
+.hm-modes.is-wide .hm-tile--center {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hm-tile--right {
+  left: calc(270 * var(--u));
+  width: calc(101 * var(--u));
+}
+
+.hm-tile--right span {
+  font-size: calc(20 * var(--u));
+}
+
+.hm-play {
+  position: absolute;
+  left: calc(171 * var(--u));
+  top: calc(-36 * var(--u));
+  z-index: 2;
+
+  width: calc(98 * var(--u));
+  height: calc(98 * var(--u));
+
+  padding: 0;
+
+  border: 0;
+  background: none;
+
+  cursor: pointer;
+
+  filter: drop-shadow(0 calc(4 * var(--u)) calc(4 * var(--u)) rgba(0, 0, 0, 0.3));
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.hm-modes.is-wide .hm-play {
+  opacity: 0;
+  pointer-events: none;
+
+  transform: scale(0.6);
+}
+
+.hm-play img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+/* the small back arrow for teachers and admins: keep it clear of the circle */
+.hm-back {
+  left: calc(2 * var(--u));
+  top: calc(0 * var(--u));
+
+  width: calc(28 * var(--u));
+  height: calc(20 * var(--u));
+
+  font-size: calc(17 * var(--u));
+}
