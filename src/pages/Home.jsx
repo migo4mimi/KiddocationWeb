@@ -368,29 +368,21 @@ export default function Home({
                   ? `${usesTouch ? 'Tap' : 'Click'} ${current.label} to start`
                   : `${usesTouch ? 'Tap' : 'Click'} Play to start`}
               </p>
-              <button
-                type="button"
-                className="hm-learning-pocket"
-                onClick={() =>
-                  setFlow({
-                    type: 'packet',
-                    mode: 'review',
-                    settings: {
-                      grade,
-                      category: grade === 1 ? 'counting' : 'addition',
-                    },
-                  })
-                }
-              >
-                📚 LEARNING POCKET
-              </button>
-              <button
-                type="button"
-                className="hm-friends-button"
-                onClick={() => setActiveTab('friends')}
-              >
-                FRIENDS &amp; CHAT
-              </button>
+<button
+  type="button"
+  className="hm-learning-button"
+  onClick={() => setActiveTab('learning')}
+>
+  📚 LEARNING POCKET
+</button>
+
+<button
+  type="button"
+  className="hm-friends-button"
+  onClick={() => setActiveTab('friends')}
+>
+  FRIENDS &amp; CHAT
+</button>
             </section>
           )}
 
