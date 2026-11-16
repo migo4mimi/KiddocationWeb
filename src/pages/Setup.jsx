@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getPracticePacketSelection } from '../lib/lessons';
 import { CATEGORIES, ROUND_CHOICES } from '../lib/progress';
-import './Lobby.css';
+import './lobby.css';
 import './Setup.css';
 
 const TITLES = {

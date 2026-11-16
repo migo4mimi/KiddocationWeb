@@ -19,7 +19,7 @@ import { avatarForPlayer } from '../lib/playerAvatar';
 import { notify } from '../lib/feedback';
 import Setup from './Setup';
 import Avatar from './Avatar';
-import './Lobby.css';
+import './lobby.css';
 
 const CODE_PATTERN = /^\d{6}$/;
 

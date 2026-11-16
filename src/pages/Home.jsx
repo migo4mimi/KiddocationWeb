@@ -9,7 +9,7 @@ import Settings from './Settings';
 import Setup from './Setup';
 import Game from './Game';
 import Friends from './Friends';
-import Lobby from './Lobby';
+import Lobby from './lobby';
 import Leaderboard from './LeaderBoard';
 import LearningPacket from './LearningPacket';
 import ModeSelector from './Modeselector';
