@@ -11,8 +11,8 @@ The app is published at `https://migo4mimi.github.io/KiddocationWeb/` whenever
 changes are pushed to `main`. The deployment workflow builds the app with this
 project-page base path and downloads the Grade 5 video from Git LFS.
 
-Before the first deployment, add these repository secrets under **Settings →
-Secrets and variables → Actions**:
+Before the first deployment, add these as repository secrets or Actions
+variables under **Settings → Secrets and variables → Actions**:
 
 - `VITE_SUPABASE_URL`
 - `VITE_SUPABASE_PUBLISHABLE_KEY`
